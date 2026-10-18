@@ -1,0 +1,11 @@
+{
+ "users": [
+  {
+   "username": "admin",
+   "name": "Super Admin",
+   "role": "admin",
+   "pass": "177344eee8aa84e7:9274a31b97631218befe3bf121ee315a9ed7b43546ad922272c5c2803a3fff9a"
+  }
+ ],
+ "reports": []
+}

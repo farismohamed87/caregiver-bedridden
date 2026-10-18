@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ms"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jagaan Pesakit</title>
+<style>
+:root{--c:#0f766e;--l:#e6f7f5;--ink:#10302d}*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Roboto,sans-serif;background:#f4faf9;color:var(--ink)}
+header{background:var(--c);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+h1{margin:0;font-size:1.25rem}main{max-width:760px;margin:auto;padding:12px 14px 60px}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin:12px 0;box-shadow:0 2px 6px #0001}
+h3{margin:0 0 8px;color:var(--c)}label{display:block;font-weight:600;margin:10px 0 3px}
+input,textarea,select{width:100%;font:inherit;padding:9px;border:2px solid #b7d8d4;border-radius:10px}
+textarea{min-height:70px}button{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:10px;padding:9px 16px;background:var(--c);color:#fff}
+button.s{background:#fff;color:var(--c);border:2px solid var(--c)}button.d{background:#c0392b}
+nav{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}nav button{background:#fff;color:var(--c);border:2px solid var(--c)}nav button.on{background:var(--c);color:#fff}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:520px){.g2{grid-template-columns:1fr}}
+.ch{display:flex;flex-wrap:wrap;gap:6px}.ch label{margin:0;font-weight:600;border:2px solid #b7d8d4;border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.ch input{width:auto}.ch label:has(input:checked){background:var(--l);border-color:var(--c)}
+.err{color:#c0392b;font-weight:700}.ok{color:var(--c);font-weight:700}table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid #ddd;text-align:left}
+.th{display:flex;gap:6px;flex-wrap:wrap}.th img{height:70px;border-radius:8px}.tm{display:flex;gap:6px;margin:4px 0}.tm input{width:auto}
+</style></head><body>
+<header><h1>🏥 Jagaan Pesakit</h1><div id="who"></div></header><main id="v"></main>
+<script>
+const $=s=>document.querySelector(s),V=$("#v");let me=null,tab="form",tok="";try{tok=localStorage.getItem("tk")||""}catch{}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function api(p,m="GET",b){const r=await fetch("/api"+p,{method:m,headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:b?JSON.stringify(b):undefined});
+  const t=await r.text();if(r.status===401&&me){logout();throw new Error("Sesi tamat")}if(!r.ok)throw new Error((()=>{try{return JSON.parse(t).error}catch{return t}})());return r.headers.get("content-type").includes("json")?JSON.parse(t):t}
+function logout(){tok="";me=null;try{localStorage.removeItem("tk")}catch{}init()}
+async function init(){$("#who").innerHTML="";if(tok){try{me=await api("/me")}catch{me=null}}me?app():login()}
+function login(e=""){V.innerHTML=`<div class="card" style="max-width:380px;margin:40px auto"><h3>Log Masuk</h3><label>Username</label><input id="u" autocomplete="username"><label>Kata laluan</label><input id="p" type="password" autocomplete="current-password"><p class="err">${esc(e)}</p><button id="b" style="width:100%">Log masuk</button></div>`;
+  $("#p").onkeydown=e=>{if(e.key==="Enter")$("#b").click()};
+  $("#b").onclick=async()=>{try{const r=await api("/login","POST",{username:$("#u").value.trim().toLowerCase(),password:$("#p").value});tok=r.token;try{localStorage.setItem("tk",tok)}catch{}me=r.user;app()}catch(x){login(x.message)}}}
+function app(){$("#who").innerHTML=`${esc(me.name)} <button class="s" onclick="logout()">Keluar</button>`;
+  const T=[["form","📝 Borang"],["hist","📂 Sejarah"],...(me.role==="admin"?[["usr","👥 Pengguna"]]:[])];
+  V.innerHTML=`<nav>${T.map(([k,l])=>`<button class="${k===tab?"on":""}" onclick="tab='${k}';app()">${l}</button>`).join("")}</nav><div id="c"></div>`;({form,hist,usr})[tab]()}
+// ---- Borang
+const SS={milk:["4AM","8AM","12PM","4PM","8PM","11PM"],pampers:["3AM","6AM","9AM","12PM","4PM","7PM","11PM"],meds:["8AM","12PM","4PM","8PM","11PM"]};
+let PH=[],WA="";
+const chips=(k)=>`<div class="ch">${SS[k].map(s=>`<label><input type="checkbox" name="${k}" value="${s}">${s}</label>`).join("")}</div>`;
+const fld=(id,l,t="text",ph="")=>`<div><label>${l}</label><input id="${id}" type="${t}" placeholder="${ph}"></div>`;
+function form(){PH=[];$("#c").innerHTML=`<div class="card"><h3>Maklumat</h3>${fld("patient","Patient name / Nama pesakit")}<label>Caretaker name / Penjaga</label><input value="${esc(me.name)}" disabled></div>
+<div class="card"><h3>Shift Information</h3><div class="g2">${fld("ss","Shift start","datetime-local")}${fld("se","Shift end","datetime-local")}</div></div>
+<div class="card"><h3>Patient Condition</h3><div class="g2">${fld("temp","Temperature / Suhu (°C)","text","37.0")}${fld("spo2","SpO2 / Oksigen (%)","text","98")}${fld("bp","Blood Pressure / Tekanan Darah","text","120/80")}${fld("hr","Heart Rate (bpm)","text","75")}${fld("sugar","Sugar / Gula (mmol/L)","text","6.5")}<div><label>Cough / Batuk</label><select id="cough"><option>Tiada</option><option>Ada</option></select></div></div><label>Others</label><textarea id="others"></textarea></div>
+<div class="card"><h3>Carer Tasks</h3><label>Bagi Susu (pilih sesi)</label>${chips("milk")}<label>Tukar Pampers (pilih sesi)</label>${chips("pampers")}
+<label>Any bedsore notice?</label><select id="bs" onchange="$('#bsx').style.display=this.value==='yes'?'block':'none'"><option value="no">Tiada / No</option><option value="yes">Ada / Yes</option></select>
+<div id="bsx" style="display:none"><label>Attach picture (auto 800×600)</label><input type="file" accept="image/*" multiple onchange="pics(this)"><div class="th" id="th"></div></div>
+<label>Bagi Ubat (pilih sesi)</label>${chips("meds")}<label>Mengiring ke kanan (masa)</label><div id="right"></div><button class="s" onclick="tm('right')">+ Masa</button>
+<label>Mengiring ke kiri (masa)</label><div id="left"></div><button class="s" onclick="tm('left')">+ Masa</button><label>Other</label><textarea id="ot"></textarea></div>
+<div class="card"><h3>Handover Notes</h3><textarea id="ho"></textarea></div><p id="msg"></p><button id="sub" style="width:100%;padding:13px">Hantar laporan</button>`;
+  tm("right");tm("left");$("#sub").onclick=submit}
+function tm(id){$("#"+id).insertAdjacentHTML("beforeend",`<div class="tm"><input type="time"></div>`)}
+const chk=n=>[...document.querySelectorAll(`input[name=${n}]:checked`)].map(x=>x.value),times=id=>[...document.querySelectorAll(`#${id} input`)].map(x=>x.value).filter(Boolean);
+function rs(f){return new Promise(ok=>{const i=new Image();i.onload=()=>{const k=Math.min(1,800/i.width,600/i.height),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",.85))};i.src=URL.createObjectURL(f)})}
+async function pics(el){for(const f of el.files)PH.push(await rs(f));$("#th").innerHTML=PH.map(p=>`<img src="${p}">`).join("")}
+async function submit(){const v=id=>$("#"+id).value.trim(),b=$("#sub");const fmt=s=>s?s.replace("T"," "):"";
+  const d={patient:v("patient"),shiftStart:fmt(v("ss")),shiftEnd:fmt(v("se")),temp:v("temp"),spo2:v("spo2"),bp:v("bp"),hr:v("hr"),sugar:v("sugar"),cough:v("cough"),others:v("others"),milk:chk("milk"),pampers:chk("pampers"),meds:chk("meds"),bedsore:v("bs"),photos:v("bs")==="yes"?PH:[],right:times("right"),left:times("left"),otherTasks:v("ot"),handover:v("ho")};
+  b.disabled=true;b.textContent="Menghantar…";$("#msg").textContent="";
+  try{const r=await api("/reports","POST",d);$("#c").innerHTML=`<div class="card"><h3>✅ Laporan disimpan</h3><p>Email: ${esc(r.sent.email)}<br>Telegram: ${esc(r.sent.telegram)}</p><button onclick="window.open('https://wa.me/?text='+encodeURIComponent(WA))">📲 Hantar ke WhatsApp</button> <button class="s" onclick="view(${r.id})">Lihat / Cetak laporan</button> <button class="s" onclick="tab='form';app()">Borang baharu</button></div>`;WA=r.text}
+  catch(e){$("#msg").innerHTML=`<span class="err">${esc(e.message)}</span>`;b.disabled=false;b.textContent="Hantar laporan"}}
+async function view(id){const w=window.open("");try{w.document.write(await api("/reports/"+id))}catch(e){w.close();alert(e.message)}}
+// ---- Sejarah
+async function hist(){$("#c").innerHTML=`<div class="card"><h3>Sejarah laporan</h3><div id="hl">Memuatkan…</div></div>`;
+  const r=await api("/reports");$("#hl").innerHTML=r.length?`<table><tr><th>Tarikh</th><th>Pesakit</th><th>Penjaga</th><th></th></tr>${r.map(x=>`<tr><td>${esc(x.ts)}</td><td>${esc(x.patient)}</td><td>${esc(x.byName)}</td><td><button class="s" onclick="view(${x.id})">Buka</button></td></tr>`).join("")}</table>`:"Tiada laporan lagi."}
+// ---- Pengguna (super admin)
+async function usr(){$("#c").innerHTML=`<div class="card"><h3>Cipta pengguna (caregiver)</h3>${fld("nu","Username")}${fld("nn","Nama penuh")}${fld("np","Kata laluan (min 6)","password")}<p id="um"></p><button onclick="addU()">Cipta</button></div><div class="card"><h3>Senarai pengguna</h3><div id="ul"></div></div>`;ul()}
+async function ul(){const r=await api("/users");$("#ul").innerHTML=`<table>${r.map(x=>`<tr><td>${esc(x.username)}</td><td>${esc(x.name)}</td><td>${x.role}</td><td>${x.username===me.username?"":`<button class="d" onclick="delU('${esc(x.username)}')">Padam</button>`}</td></tr>`).join("")}</table>`}
+async function addU(){try{await api("/users","POST",{username:$("#nu").value,name:$("#nn").value,password:$("#np").value});$("#um").innerHTML='<span class="ok">Pengguna dicipta ✅</span>';["nu","nn","np"].forEach(i=>$("#"+i).value="");ul()}catch(e){$("#um").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function delU(n){if(confirm("Padam "+n+"?")){await api("/users/"+encodeURIComponent(n),"DELETE");ul()}}
+init();
+</script></body></html>
