@@ -27,7 +27,43 @@
    "byName": "Aman b Damai",
    "patient": "Pok Mat",
    "ts": "19/10/2026, 10:12:18 PTG"
+  },
+  {
+   "id": 1792425259229,
+   "by": "aman-caregiver1",
+   "byName": "Aman b Damai",
+   "patient": "Test",
+   "ts": "19/10/2026, 11:54:19 PTG"
   }
  ],
- "inventory": []
+ "inventory": [
+  {
+   "id": 1792424308446,
+   "name": "Pampers",
+   "unit": "Pack",
+   "stock": 10,
+   "min": 2,
+   "by": "Aman b Damai",
+   "ts": "19/10/2026, 11:40:09 pm"
+  },
+  {
+   "id": 1792424340552,
+   "name": "Susu",
+   "unit": "Tin",
+   "stock": 10,
+   "min": 2,
+   "by": "Super Admin",
+   "ts": "19/10/2026, 11:39:00 pm"
+  },
+  {
+   "id": 1792424353917,
+   "name": "Tisu",
+   "unit": "Roll",
+   "stock": 10,
+   "min": 2,
+   "by": "Super Admin",
+   "ts": "19/10/2026, 11:39:13 pm"
+  }
+ ],
+ "patient": "abcd"
 }
