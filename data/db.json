@@ -5,7 +5,29 @@
    "name": "Super Admin",
    "role": "admin",
    "pass": "177344eee8aa84e7:9274a31b97631218befe3bf121ee315a9ed7b43546ad922272c5c2803a3fff9a"
+  },
+  {
+   "username": "aman-caregiver1",
+   "name": "Aman b Damai",
+   "role": "caregiver",
+   "pass": "c5bd6f45a4ba4c70:06809c77d4e88c20892833823ca2fd7709b7de912b8699b5a75b62345904a545"
   }
  ],
- "reports": []
+ "reports": [
+  {
+   "id": 1792418900821,
+   "by": "aman-caregiver1",
+   "byName": "Aman b Damai",
+   "patient": "bey mat",
+   "ts": "19/10/2026, 10:08:20 PTG"
+  },
+  {
+   "id": 1792419138459,
+   "by": "aman-caregiver1",
+   "byName": "Aman b Damai",
+   "patient": "Pok Mat",
+   "ts": "19/10/2026, 10:12:18 PTG"
+  }
+ ],
+ "inventory": []
 }

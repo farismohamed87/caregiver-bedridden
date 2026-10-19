@@ -16,53 +16,107 @@ nav{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}nav button{background:#fff
 .ch input{width:auto}.ch label:has(input:checked){background:var(--l);border-color:var(--c)}
 .err{color:#c0392b;font-weight:700}.ok{color:var(--c);font-weight:700}table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid #ddd;text-align:left}
 .th{display:flex;gap:6px;flex-wrap:wrap}.th img{height:70px;border-radius:8px}.tm{display:flex;gap:6px;margin:4px 0}.tm input{width:auto}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.g3 b{font-size:1.6rem;display:block}.it{border:2px solid #d3e8e5;border-radius:12px;padding:10px 12px;margin:8px 0}.it.low{border-color:#e67e22;background:#fff7ee}.it.out{border-color:#c0392b;background:#fff0ef}.pb{height:10px;background:#e0eceb;border-radius:6px;overflow:hidden;margin:6px 0}.pb i{display:block;height:100%;background:var(--c)}.low .pb i{background:#e67e22}.out .pb i{background:#c0392b}.bg{font-size:.8rem;border-radius:999px;padding:2px 10px;color:#fff;background:var(--c)}.low .bg{background:#e67e22}.out .bg{background:#c0392b}.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.row input{width:90px;text-align:center}.row button{padding:6px 14px}
 </style></head><body>
-<header><h1>🏥 Jagaan Pesakit</h1><div id="who"></div></header><main id="v"></main>
+<header><h1 id="title">🏥 Jagaan Pesakit</h1><div id="who"></div></header><main id="v"></main>
 <script>
 const $=s=>document.querySelector(s),V=$("#v");let me=null,tab="form",tok="";try{tok=localStorage.getItem("tk")||""}catch{}
+const TX={
+ ms:{appTitle:"🏥 Jagaan Pesakit",logout:"Keluar",tabForm:"📝 Borang",tabInventory:"📦 Inventori",tabHistory:"📂 Sejarah",tabUsers:"👥 Pengguna",
+  loginTitle:"Log Masuk",username:"Username",password:"Kata laluan",loginBtn:"Log masuk",
+  info:"Maklumat",patientName:"Nama pesakit",caretaker:"Nama penjaga",shiftInfo:"Maklumat Syif",shiftStart:"Mula syif",shiftEnd:"Tamat syif",
+  condition:"Keadaan Pesakit",temp:"Suhu (°C)",spo2:"SpO2 / Oksigen (%)",bp:"Tekanan darah",hr:"Kadar jantung (bpm)",sugar:"Gula (mmol/L)",cough:"Batuk",no:"Tiada",yes:"Ada",others:"Lain-lain",
+  tasks:"Tugas Penjaga",milk:"Bagi susu (masa)",pampers:"Tukar pampers (masa)",bedsoreQ:"Ada kesan bedsore?",attach:"Lampirkan gambar (auto 800×600)",
+  meds:"Bagi ubat (masa)",right:"Mengiring ke kanan (masa)",left:"Mengiring ke kiri (masa)",other:"Lain-lain",handover:"Nota Serah Tugas",addTime:"+ Masa",
+  submit:"Hantar laporan",submitting:"Menghantar…",saved:"✅ Laporan disimpan",wa:"📲 Hantar ke WhatsApp",viewPrint:"Lihat / Cetak laporan",newForm:"Borang baharu",
+  historyTitle:"Sejarah laporan",loading:"Memuatkan…",date:"Tarikh",patientCol:"Pesakit",caretakerCol:"Penjaga",open:"Buka",noReports:"Tiada laporan lagi.",
+  invTitle:"📦 Dashboard Inventori",totalItems:"Jumlah item",lowStock:"Stok rendah",outStock:"Habis",addItemAdmin:"Tambah item (super admin)",
+  itemName:"Nama item",unit:"Unit",itemNamePh:"cth: Pampers",unitPh:"cth: pek / tin / biji",initialStock:"Stok awal",minStock:"Stok minimum (amaran)",add:"Tambah",
+  stockOnly:"Anda boleh kemas kini bilangan stok sahaja.",invList:"Senarai inventori",out:"Habis",low:"Rendah",enough:"Cukup",minLabel:"min",edit:"Edit",delete:"Padam",
+  updated:"Kemas kini:",by:"oleh",noItems:"Tiada item lagi.",askAdmin:" Minta super admin tambah item.",itemNamePrompt:"Nama item",unitPrompt:"Unit",
+  minPrompt:"Stok minimum (amaran)",deleteItemQ:"Padam item ini?",
+  createUser:"Cipta pengguna (caregiver)",fullName:"Nama penuh",passwordMin:"Kata laluan (min 6)",create:"Cipta",userList:"Senarai pengguna",userCreated:"Pengguna dicipta ✅",deleteUserQ:"Padam {n}?"},
+ en:{appTitle:"🏥 Patient Care",logout:"Logout",tabForm:"📝 Form",tabInventory:"📦 Inventory",tabHistory:"📂 History",tabUsers:"👥 Users",
+  loginTitle:"Sign In",username:"Username",password:"Password",loginBtn:"Sign in",
+  info:"Information",patientName:"Patient name",caretaker:"Caretaker name",shiftInfo:"Shift Information",shiftStart:"Shift start",shiftEnd:"Shift end",
+  condition:"Patient Condition",temp:"Temperature (°C)",spo2:"SpO2 / Oxygen (%)",bp:"Blood pressure",hr:"Heart rate (bpm)",sugar:"Sugar (mmol/L)",cough:"Cough",no:"No",yes:"Yes",others:"Others",
+  tasks:"Carer Tasks",milk:"Milk feeding (time)",pampers:"Change pampers (time)",bedsoreQ:"Any bedsore noticed?",attach:"Attach picture (auto 800×600)",
+  meds:"Give medicine (time)",right:"Turn to right (time)",left:"Turn to left (time)",other:"Other",handover:"Handover Notes",addTime:"+ Time",
+  submit:"Submit report",submitting:"Submitting…",saved:"✅ Report saved",wa:"📲 Send to WhatsApp",viewPrint:"View / Print report",newForm:"New form",
+  historyTitle:"Report history",loading:"Loading…",date:"Date",patientCol:"Patient",caretakerCol:"Caretaker",open:"Open",noReports:"No reports yet.",
+  invTitle:"📦 Inventory Dashboard",totalItems:"Total items",lowStock:"Low stock",outStock:"Out of stock",addItemAdmin:"Add item (super admin)",
+  itemName:"Item name",unit:"Unit",itemNamePh:"e.g. Pampers",unitPh:"e.g. pack / tin / pcs",initialStock:"Initial stock",minStock:"Minimum stock (alert)",add:"Add",
+  stockOnly:"You can only update stock quantities.",invList:"Inventory list",out:"Out",low:"Low",enough:"Enough",minLabel:"min",edit:"Edit",delete:"Delete",
+  updated:"Updated:",by:"by",noItems:"No items yet.",askAdmin:" Ask a super admin to add items.",itemNamePrompt:"Item name",unitPrompt:"Unit",
+  minPrompt:"Minimum stock (alert)",deleteItemQ:"Delete this item?",
+  createUser:"Create user (caregiver)",fullName:"Full name",passwordMin:"Password (min 6)",create:"Create",userList:"User list",userCreated:"User created ✅",deleteUserQ:"Delete {n}?"}
+};
+let lang="ms";try{lang=localStorage.getItem("lang")==="en"?"en":"ms"}catch{}
+const t=k=>(TX[lang]&&TX[lang][k])||TX.ms[k]||k;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-async function api(p,m="GET",b){const r=await fetch("/api"+p,{method:m,headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok},body:b?JSON.stringify(b):undefined});
-  const t=await r.text();if(r.status===401&&me){logout();throw new Error("Sesi tamat")}if(!r.ok)throw new Error((()=>{try{return JSON.parse(t).error}catch{return t}})());return r.headers.get("content-type").includes("json")?JSON.parse(t):t}
+function chrome(){document.documentElement.lang=lang;$("#title").textContent=t("appTitle");$("#who").innerHTML=(me?esc(me.name)+" ":"")+`<button class="s" onclick="toggleLang()">🌐 ${lang==="ms"?"EN":"BM"}</button>`+(me?` <button class="s" onclick="logout()">${t("logout")}</button>`:"")}
+function snap(){if(!$("#patient"))return null;const s={raw:{},times:{},photos:PH.slice(),bs:$("#bs").value};
+ ["patient","ss","se","temp","spo2","bp","hr","sugar","cough","others","bs","ot","ho"].forEach(id=>{const e=$("#"+id);if(e)s.raw[id]=e.value});
+ ["milk","pampers","meds","right","left"].forEach(id=>{const c=$("#"+id);if(c)s.times[id]=[...c.querySelectorAll("input")].map(x=>x.value)});return s}
+function restore(s){if(!s||!$("#patient"))return;
+ ["patient","ss","se","temp","spo2","bp","hr","sugar","cough","others","bs","ot","ho"].forEach(id=>{const e=$("#"+id);if(e&&s.raw[id]!==undefined)e.value=s.raw[id]});
+ ["milk","pampers","meds","right","left"].forEach(id=>{const c=$("#"+id);if(!c||!s.times[id])return;c.innerHTML="";s.times[id].forEach(v=>c.insertAdjacentHTML("beforeend",`<div class="tm"><input type="time" value="${esc(v)}"></div>`))});
+ PH=s.photos||[];const th=$("#th");if(th)th.innerHTML=PH.map(p=>`<img src="${p}">`).join("");$("#bsx").style.display=s.bs==="yes"?"block":"none"}
+function toggleLang(){const s=snap();lang=lang==="ms"?"en":"ms";try{localStorage.setItem("lang",lang)}catch{}if(me){app();restore(s)}else{chrome();login()}}
+async function api(p,m="GET",b){const r=await fetch("/api"+p,{method:m,headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok,"X-Lang":lang},body:b?JSON.stringify(b):undefined});
+  const x=await r.text();if(r.status===401&&me){logout();throw new Error(lang==="en"?"Session ended":"Sesi tamat")}if(!r.ok)throw new Error((()=>{try{return JSON.parse(x).error}catch{return x}})());return r.headers.get("content-type").includes("json")?JSON.parse(x):x}
 function logout(){tok="";me=null;try{localStorage.removeItem("tk")}catch{}init()}
-async function init(){$("#who").innerHTML="";if(tok){try{me=await api("/me")}catch{me=null}}me?app():login()}
-function login(e=""){V.innerHTML=`<div class="card" style="max-width:380px;margin:40px auto"><h3>Log Masuk</h3><label>Username</label><input id="u" autocomplete="username"><label>Kata laluan</label><input id="p" type="password" autocomplete="current-password"><p class="err">${esc(e)}</p><button id="b" style="width:100%">Log masuk</button></div>`;
+async function init(){chrome();if(tok){try{me=await api("/me")}catch{me=null}}me?app():login()}
+function login(e=""){V.innerHTML=`<div class="card" style="max-width:380px;margin:40px auto"><h3>${t("loginTitle")}</h3><label>${t("username")}</label><input id="u" autocomplete="username"><label>${t("password")}</label><input id="p" type="password" autocomplete="current-password"><p class="err">${esc(e)}</p><button id="b" style="width:100%">${t("loginBtn")}</button></div>`;
   $("#p").onkeydown=e=>{if(e.key==="Enter")$("#b").click()};
   $("#b").onclick=async()=>{try{const r=await api("/login","POST",{username:$("#u").value.trim().toLowerCase(),password:$("#p").value});tok=r.token;try{localStorage.setItem("tk",tok)}catch{}me=r.user;app()}catch(x){login(x.message)}}}
-function app(){$("#who").innerHTML=`${esc(me.name)} <button class="s" onclick="logout()">Keluar</button>`;
-  const T=[["form","📝 Borang"],["hist","📂 Sejarah"],...(me.role==="admin"?[["usr","👥 Pengguna"]]:[])];
-  V.innerHTML=`<nav>${T.map(([k,l])=>`<button class="${k===tab?"on":""}" onclick="tab='${k}';app()">${l}</button>`).join("")}</nav><div id="c"></div>`;({form,hist,usr})[tab]()}
-// ---- Borang
-const SS={milk:["4AM","8AM","12PM","4PM","8PM","11PM"],pampers:["3AM","6AM","9AM","12PM","4PM","7PM","11PM"],meds:["8AM","12PM","4PM","8PM","11PM"]};
+function app(){chrome();
+  const T=[["form",t("tabForm")],["inv",t("tabInventory")],["hist",t("tabHistory")],...(me.role==="admin"?[["usr",t("tabUsers")]]:[])];
+  V.innerHTML=`<nav>${T.map(([k,l])=>`<button class="${k===tab?"on":""}" onclick="tab='${k}';app()">${l}</button>`).join("")}</nav><div id="c"></div>`;({form,hist,usr,inv})[tab]()}
+// ---- Form
 let PH=[],WA="";
-const chips=(k)=>`<div class="ch">${SS[k].map(s=>`<label><input type="checkbox" name="${k}" value="${s}">${s}</label>`).join("")}</div>`;
-const fld=(id,l,t="text",ph="")=>`<div><label>${l}</label><input id="${id}" type="${t}" placeholder="${ph}"></div>`;
-function form(){PH=[];$("#c").innerHTML=`<div class="card"><h3>Maklumat</h3>${fld("patient","Patient name / Nama pesakit")}<label>Caretaker name / Penjaga</label><input value="${esc(me.name)}" disabled></div>
-<div class="card"><h3>Shift Information</h3><div class="g2">${fld("ss","Shift start","datetime-local")}${fld("se","Shift end","datetime-local")}</div></div>
-<div class="card"><h3>Patient Condition</h3><div class="g2">${fld("temp","Temperature / Suhu (°C)","text","37.0")}${fld("spo2","SpO2 / Oksigen (%)","text","98")}${fld("bp","Blood Pressure / Tekanan Darah","text","120/80")}${fld("hr","Heart Rate (bpm)","text","75")}${fld("sugar","Sugar / Gula (mmol/L)","text","6.5")}<div><label>Cough / Batuk</label><select id="cough"><option>Tiada</option><option>Ada</option></select></div></div><label>Others</label><textarea id="others"></textarea></div>
-<div class="card"><h3>Carer Tasks</h3><label>Bagi Susu (pilih sesi)</label>${chips("milk")}<label>Tukar Pampers (pilih sesi)</label>${chips("pampers")}
-<label>Any bedsore notice?</label><select id="bs" onchange="$('#bsx').style.display=this.value==='yes'?'block':'none'"><option value="no">Tiada / No</option><option value="yes">Ada / Yes</option></select>
-<div id="bsx" style="display:none"><label>Attach picture (auto 800×600)</label><input type="file" accept="image/*" multiple onchange="pics(this)"><div class="th" id="th"></div></div>
-<label>Bagi Ubat (pilih sesi)</label>${chips("meds")}<label>Mengiring ke kanan (masa)</label><div id="right"></div><button class="s" onclick="tm('right')">+ Masa</button>
-<label>Mengiring ke kiri (masa)</label><div id="left"></div><button class="s" onclick="tm('left')">+ Masa</button><label>Other</label><textarea id="ot"></textarea></div>
-<div class="card"><h3>Handover Notes</h3><textarea id="ho"></textarea></div><p id="msg"></p><button id="sub" style="width:100%;padding:13px">Hantar laporan</button>`;
-  tm("right");tm("left");$("#sub").onclick=submit}
+const fld=(id,l,ty="text",ph="")=>`<div><label>${l}</label><input id="${id}" type="${ty}" placeholder="${ph}"></div>`;
+function form(){PH=[];$("#c").innerHTML=`<div class="card"><h3>${t("info")}</h3>${fld("patient",t("patientName"))}<label>${t("caretaker")}</label><input value="${esc(me.name)}" disabled></div>
+<div class="card"><h3>${t("shiftInfo")}</h3><div class="g2">${fld("ss",t("shiftStart"),"datetime-local")}${fld("se",t("shiftEnd"),"datetime-local")}</div></div>
+<div class="card"><h3>${t("condition")}</h3><div class="g2">${fld("temp",t("temp"),"text","37.0")}${fld("spo2",t("spo2"),"text","98")}${fld("bp",t("bp"),"text","120/80")}${fld("hr",t("hr"),"text","75")}${fld("sugar",t("sugar"),"text","6.5")}<div><label>${t("cough")}</label><select id="cough"><option value="no">${t("no")}</option><option value="yes">${t("yes")}</option></select></div></div><label>${t("others")}</label><textarea id="others"></textarea></div>
+<div class="card"><h3>${t("tasks")}</h3>${tl("milk",t("milk"))}${tl("pampers",t("pampers"))}
+<label>${t("bedsoreQ")}</label><select id="bs" onchange="$('#bsx').style.display=this.value==='yes'?'block':'none'"><option value="no">${t("no")}</option><option value="yes">${t("yes")}</option></select>
+<div id="bsx" style="display:none"><label>${t("attach")}</label><input type="file" accept="image/*" multiple onchange="pics(this)"><div class="th" id="th"></div></div>
+${tl("meds",t("meds"))}${tl("right",t("right"))}${tl("left",t("left"))}<label>${t("other")}</label><textarea id="ot"></textarea></div>
+<div class="card"><h3>${t("handover")}</h3><textarea id="ho"></textarea></div><p id="msg"></p><button id="sub" style="width:100%;padding:13px">${t("submit")}</button>`;
+  ["milk","pampers","meds","right","left"].forEach(i=>tm(i));$("#sub").onclick=submit}
+const tl=(id,l)=>`<label>${l}</label><div id="${id}"></div><button class="s" onclick="tm('${id}')">${t("addTime")}</button>`;
 function tm(id){$("#"+id).insertAdjacentHTML("beforeend",`<div class="tm"><input type="time"></div>`)}
-const chk=n=>[...document.querySelectorAll(`input[name=${n}]:checked`)].map(x=>x.value),times=id=>[...document.querySelectorAll(`#${id} input`)].map(x=>x.value).filter(Boolean);
+const times=id=>[...document.querySelectorAll(`#${id} input`)].map(x=>x.value).filter(Boolean);
 function rs(f){return new Promise(ok=>{const i=new Image();i.onload=()=>{const k=Math.min(1,800/i.width,600/i.height),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",.85))};i.src=URL.createObjectURL(f)})}
 async function pics(el){for(const f of el.files)PH.push(await rs(f));$("#th").innerHTML=PH.map(p=>`<img src="${p}">`).join("")}
 async function submit(){const v=id=>$("#"+id).value.trim(),b=$("#sub");const fmt=s=>s?s.replace("T"," "):"";
-  const d={patient:v("patient"),shiftStart:fmt(v("ss")),shiftEnd:fmt(v("se")),temp:v("temp"),spo2:v("spo2"),bp:v("bp"),hr:v("hr"),sugar:v("sugar"),cough:v("cough"),others:v("others"),milk:chk("milk"),pampers:chk("pampers"),meds:chk("meds"),bedsore:v("bs"),photos:v("bs")==="yes"?PH:[],right:times("right"),left:times("left"),otherTasks:v("ot"),handover:v("ho")};
-  b.disabled=true;b.textContent="Menghantar…";$("#msg").textContent="";
-  try{const r=await api("/reports","POST",d);$("#c").innerHTML=`<div class="card"><h3>✅ Laporan disimpan</h3><p>Email: ${esc(r.sent.email)}<br>Telegram: ${esc(r.sent.telegram)}</p><button onclick="window.open('https://wa.me/?text='+encodeURIComponent(WA))">📲 Hantar ke WhatsApp</button> <button class="s" onclick="view(${r.id})">Lihat / Cetak laporan</button> <button class="s" onclick="tab='form';app()">Borang baharu</button></div>`;WA=r.text}
-  catch(e){$("#msg").innerHTML=`<span class="err">${esc(e.message)}</span>`;b.disabled=false;b.textContent="Hantar laporan"}}
+  const d={patient:v("patient"),shiftStart:fmt(v("ss")),shiftEnd:fmt(v("se")),temp:v("temp"),spo2:v("spo2"),bp:v("bp"),hr:v("hr"),sugar:v("sugar"),cough:v("cough"),others:v("others"),milk:times("milk"),pampers:times("pampers"),meds:times("meds"),bedsore:v("bs"),photos:v("bs")==="yes"?PH:[],right:times("right"),left:times("left"),otherTasks:v("ot"),handover:v("ho")};
+  b.disabled=true;b.textContent=t("submitting");$("#msg").textContent="";
+  try{const r=await api("/reports","POST",d);$("#c").innerHTML=`<div class="card"><h3>${t("saved")}</h3><p>Email: ${esc(r.sent.email)}<br>Telegram: ${esc(r.sent.telegram)}</p><button onclick="window.open('https://wa.me/?text='+encodeURIComponent(WA))">${t("wa")}</button> <button class="s" onclick="view(${r.id})">${t("viewPrint")}</button> <button class="s" onclick="tab='form';app()">${t("newForm")}</button></div>`;WA=r.text}
+  catch(e){$("#msg").innerHTML=`<span class="err">${esc(e.message)}</span>`;b.disabled=false;b.textContent=t("submit")}}
 async function view(id){const w=window.open("");try{w.document.write(await api("/reports/"+id))}catch(e){w.close();alert(e.message)}}
-// ---- Sejarah
-async function hist(){$("#c").innerHTML=`<div class="card"><h3>Sejarah laporan</h3><div id="hl">Memuatkan…</div></div>`;
-  const r=await api("/reports");$("#hl").innerHTML=r.length?`<table><tr><th>Tarikh</th><th>Pesakit</th><th>Penjaga</th><th></th></tr>${r.map(x=>`<tr><td>${esc(x.ts)}</td><td>${esc(x.patient)}</td><td>${esc(x.byName)}</td><td><button class="s" onclick="view(${x.id})">Buka</button></td></tr>`).join("")}</table>`:"Tiada laporan lagi."}
-// ---- Pengguna (super admin)
-async function usr(){$("#c").innerHTML=`<div class="card"><h3>Cipta pengguna (caregiver)</h3>${fld("nu","Username")}${fld("nn","Nama penuh")}${fld("np","Kata laluan (min 6)","password")}<p id="um"></p><button onclick="addU()">Cipta</button></div><div class="card"><h3>Senarai pengguna</h3><div id="ul"></div></div>`;ul()}
-async function ul(){const r=await api("/users");$("#ul").innerHTML=`<table>${r.map(x=>`<tr><td>${esc(x.username)}</td><td>${esc(x.name)}</td><td>${x.role}</td><td>${x.username===me.username?"":`<button class="d" onclick="delU('${esc(x.username)}')">Padam</button>`}</td></tr>`).join("")}</table>`}
-async function addU(){try{await api("/users","POST",{username:$("#nu").value,name:$("#nn").value,password:$("#np").value});$("#um").innerHTML='<span class="ok">Pengguna dicipta ✅</span>';["nu","nn","np"].forEach(i=>$("#"+i).value="");ul()}catch(e){$("#um").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
-async function delU(n){if(confirm("Padam "+n+"?")){await api("/users/"+encodeURIComponent(n),"DELETE");ul()}}
+// ---- History
+async function hist(){$("#c").innerHTML=`<div class="card"><h3>${t("historyTitle")}</h3><div id="hl">${t("loading")}</div></div>`;
+  const r=await api("/reports");$("#hl").innerHTML=r.length?`<table><tr><th>${t("date")}</th><th>${t("patientCol")}</th><th>${t("caretakerCol")}</th><th></th></tr>${r.map(x=>`<tr><td>${esc(x.ts)}</td><td>${esc(x.patient)}</td><td>${esc(x.byName)}</td><td><button class="s" onclick="view(${x.id})">${t("open")}</button></td></tr>`).join("")}</table>`:t("noReports")}
+// ---- Inventory
+let INV=[];const adm=()=>me.role==="admin";
+async function inv(){$("#c").innerHTML=`<div class="card"><h3>${t("invTitle")}</h3><div class="g3" id="ist"></div></div>${adm()?`<div class="card"><h3>${t("addItemAdmin")}</h3><div class="g2">${fld("in",t("itemName"),"text",t("itemNamePh"))}${fld("iu",t("unit"),"text",t("unitPh"))}${fld("i0",t("initialStock"),"number")}${fld("im",t("minStock"),"number")}</div><p id="ie"></p><button onclick="addI()">${t("add")}</button></div>`:`<p style="color:#555">${t("stockOnly")}</p>`}<div class="card"><h3>${t("invList")}</h3><div id="il">${t("loading")}</div></div>`;il()}
+const st=i=>i.stock===0?"out":i.stock<=i.min?"low":"";
+async function il(){INV=await api("/inventory");const low=INV.filter(i=>st(i)==="low").length,out=INV.filter(i=>st(i)==="out").length;
+  $("#ist").innerHTML=`<div><b>${INV.length}</b>${t("totalItems")}</div><div style="color:#e67e22"><b>${low}</b>${t("lowStock")}</div><div style="color:#c0392b"><b>${out}</b>${t("outStock")}</div>`;
+  $("#il").innerHTML=INV.length?INV.map(i=>`<div class="it ${st(i)}"><div class="row" style="justify-content:space-between"><b>${esc(i.name)}</b><span class="bg">${{out:t("out"),low:t("low")}[st(i)]||t("enough")}</span></div>
+  <div class="pb"><i style="width:${Math.min(100,i.stock/Math.max(i.min*3,i.stock,1)*100)}%"></i></div>
+  <div class="row"><button class="s" onclick="setI(${i.id},${i.stock-1})">−</button><input type="number" min="0" value="${i.stock}" onchange="setI(${i.id},this.value)"><button class="s" onclick="setI(${i.id},${i.stock+1})">+</button><span>${esc(i.unit)} (${t("minLabel")} ${i.min})</span>
+  ${adm()?`<button class="s" onclick="editI(${i.id})">${t("edit")}</button><button class="d" onclick="delI(${i.id})">${t("delete")}</button>`:""}</div><small style="color:#666">${t("updated")} ${esc(i.ts)} ${t("by")} ${esc(i.by)}</small></div>`).join(""):t("noItems")+(adm()?"":t("askAdmin"))}
+async function setI(id,v){try{await api("/inventory/"+id,"PUT",{stock:Math.max(0,+v||0)});il()}catch(e){alert(e.message)}}
+async function addI(){try{await api("/inventory","POST",{name:$("#in").value,unit:$("#iu").value,stock:$("#i0").value,min:$("#im").value});["in","iu","i0","im"].forEach(i=>$("#"+i).value="");$("#ie").innerHTML="";il()}catch(e){$("#ie").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function editI(id){const i=INV.find(x=>x.id===id),n=prompt(t("itemNamePrompt"),i.name);if(n===null)return;const u=prompt(t("unitPrompt"),i.unit);if(u===null)return;const m=prompt(t("minPrompt"),i.min);if(m===null)return;try{await api("/inventory/"+id,"PUT",{name:n,unit:u,min:m});il()}catch(e){alert(e.message)}}
+async function delI(id){if(confirm(t("deleteItemQ"))){await api("/inventory/"+id,"DELETE");il()}}
+// ---- Users (super admin)
+async function usr(){$("#c").innerHTML=`<div class="card"><h3>${t("createUser")}</h3>${fld("nu",t("username"))}${fld("nn",t("fullName"))}${fld("np",t("passwordMin"),"password")}<p id="um"></p><button onclick="addU()">${t("create")}</button></div><div class="card"><h3>${t("userList")}</h3><div id="ul"></div></div>`;ul()}
+async function ul(){const r=await api("/users");$("#ul").innerHTML=`<table>${r.map(x=>`<tr><td>${esc(x.username)}</td><td>${esc(x.name)}</td><td>${x.role}</td><td>${x.username===me.username?"":`<button class="d" onclick="delU('${esc(x.username)}')">${t("delete")}</button>`}</td></tr>`).join("")}</table>`}
+async function addU(){try{await api("/users","POST",{username:$("#nu").value,name:$("#nn").value,password:$("#np").value});$("#um").innerHTML=`<span class="ok">${t("userCreated")}</span>`;["nu","nn","np"].forEach(i=>$("#"+i).value="");ul()}catch(e){$("#um").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function delU(n){if(confirm(t("deleteUserQ").replace("{n}",n))){await api("/users/"+encodeURIComponent(n),"DELETE");ul()}}
 init();
 </script></body></html>
