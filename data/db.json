@@ -1,0 +1,164 @@
+{
+ "users": [
+  {
+   "username": "admin",
+   "name": "enc:v1:qwRPUK3Sdnr3UZ0eMQkL6fXtU61Gx0Q0opLWt944m9lXGbQ7-iIt",
+   "role": "admin",
+   "pass": "177344eee8aa84e7:9274a31b97631218befe3bf121ee315a9ed7b43546ad922272c5c2803a3fff9a",
+   "verified": true
+  },
+  {
+   "username": "aman-caregiver1",
+   "name": "enc:v1:37gb_T2lIGeSjT78aySpjiIjKOwnv0VgtEYxa5HNPsGt9EJ_jKSQGQ",
+   "role": "caregiver",
+   "pass": "c5bd6f45a4ba4c70:06809c77d4e88c20892833823ca2fd7709b7de912b8699b5a75b62345904a545",
+   "owner": "admin",
+   "verified": true
+  },
+  {
+   "username": "smoke",
+   "email": "enc:v1:P8VP9j5VVma4pJIYseOQrMppU6teAX1owXuY8VxejI97i6AijPpmI0K8MSE",
+   "name": "enc:v1:4b9eOY6_9nObPsthxkd5hHe5ZPFqy1aNjrpx0O-bLvfjkJX5_IM",
+   "role": "admin",
+   "owner": null,
+   "pass": "060e3a6d312a99bd:5efb5c6c430dd3337bd9b162c2c41e37f685a529e911deb81ebaccfc3f0939eb",
+   "verified": true,
+   "created": "2026-10-21T15:27:00.989Z",
+   "emailIndex": "aca1aeeb20ddbba0e5f97eff0ff23f6f44b529d488956b0e27b78fe8897f1387"
+  },
+  {
+   "username": "smokecare",
+   "email": "enc:v1:VAq8J4v62yuQ07_VI5XzjAy7lPDUy4fuJSTIR_tOcExCV2-jf4qYTkzKrgWwzSTL",
+   "name": "enc:v1:ZJZRYEqnpTlNber9Q0Lr8yLmSvYbA5tFhMLiKkTGkgngaUiDiA",
+   "role": "caregiver",
+   "owner": "smoke",
+   "pass": "b541492e2c865908:90986b50bb158db1d75a5a81a2b56265bac5601a6bdc94f9386203f45e5d98a2",
+   "created": "2026-10-21T15:27:01.002Z",
+   "verified": true,
+   "emailIndex": "f5278005ae15f27a4f29cdc4808f431a837a86af48e3f720f3b08f91ef6470cc"
+  },
+  {
+   "username": "caregiver2",
+   "name": "enc:v1:eVKPAzxnfJRGy2Q1Gzggw5nQfr3-w-SkP3YcyLS1UfoyKpahT0w",
+   "role": "caregiver",
+   "owner": "admin",
+   "pass": "7cbe091005b2496a:9c55656d07db48d96189db2a8383b724466afa22a3f00f29abdc7753311de4df",
+   "verified": true,
+   "created": "2026-10-23T16:58:37.341Z"
+  },
+  {
+   "username": "master",
+   "name": "enc:v1:XzxfJRRW0uZ5gXVpxns9FL7kHirgXR9aXmb8WQr20Um3HPu59vvf-w",
+   "role": "master",
+   "owner": null,
+   "pass": "df2bc77f897ac719:d5d16204e696d654cc142c0f031dafe540c84841d761a0d51bf4cca0f1a6f687",
+   "verified": true,
+   "created": "2026-10-24T15:49:18.999Z"
+  }
+ ],
+ "reports": [],
+ "inventory": [],
+ "patient": "",
+ "appointments": [],
+ "records": [],
+ "ws": {
+  "admin": {
+   "patient": "enc:v1:6cxjE3cTQzrSs8KwkXzLInL1ZMrv6LYaUdKZvAJ3r_-wAyAhz3cn",
+   "inventory": [
+    {
+     "id": 1792424308446,
+     "name": "Pampers",
+     "unit": "Pack",
+     "stock": 10,
+     "min": 2,
+     "by": "enc:v1:5wPl96JnZBNV_UnPpoN0RMKBczv1h775japZLl58RzO3lFw5GxIOnw",
+     "ts": "19/10/2026, 11:40:09 pm"
+    },
+    {
+     "id": 1792424340552,
+     "name": "Susu",
+     "unit": "Tin",
+     "stock": 10,
+     "min": 2,
+     "by": "enc:v1:re3QEpwOE4Wa0y1aZiu65YlSXrsDFFeDnDt1eLYdGQSH3B2-fN1m",
+     "ts": "19/10/2026, 11:39:00 pm"
+    },
+    {
+     "id": 1792424353917,
+     "name": "Tisu",
+     "unit": "Roll",
+     "stock": 10,
+     "min": 2,
+     "by": "enc:v1:mE5HNtj8uTRWjU52PE2k_wQkrYS6Z2jYrxJ46bPwkqhM4s9wfcaK",
+     "ts": "19/10/2026, 11:39:13 pm"
+    },
+    {
+     "id": 1792514666919,
+     "name": "Ubat1",
+     "unit": "Botol",
+     "stock": 2,
+     "min": 1,
+     "by": "enc:v1:fYvW1uOLj_Yqj-mvzwcZ43TOj0qZKmvxwzuZelIw8cYRz2EvS92G",
+     "ts": "21/10/2026, 12:44:26 am"
+    },
+    {
+     "id": 1792514689151,
+     "name": "Ubat2",
+     "unit": "Pack",
+     "stock": 3,
+     "min": 1,
+     "by": "enc:v1:iJJ4pg_pCZfr1S8GOVxNX6hIGu5wrD4XCVMUbBYbqVk_p_TPBDip",
+     "ts": "21/10/2026, 12:45:15 am"
+    }
+   ],
+   "appointments": [],
+   "records": [
+    {
+     "id": 1792764865762,
+     "title": "abcd test",
+     "cat": "doctor",
+     "date": "2026-10-23",
+     "notes": "test",
+     "files": [],
+     "by": "admin",
+     "byName": "enc:v1:ZyySRG3KW3tsgxnp1aO-Nkhi2lG1ESHZxge6MD3rDPrzws_H4-_O",
+     "ts": "23/10/2026, 10:14:25 pm"
+    }
+   ],
+   "reports": [
+    {
+     "id": 1792775328470,
+     "by": "caregiver2",
+     "byName": "enc:v1:eVKPAzxnfJRGy2Q1Gzggw5nQfr3-w-SkP3YcyLS1UfoyKpahT0w",
+     "patient": "enc:v1:czt0u1W2j4goTzRXK10I9Btb9z1YQApalJJ-88UXOvjmIWET0Ufx",
+     "ts": "24/10/2026, 1:08:48 am"
+    },
+    {
+     "id": 1792797108553,
+     "by": "admin",
+     "byName": "enc:v1:qwRPUK3Sdnr3UZ0eMQkL6fXtU61Gx0Q0opLWt944m9lXGbQ7-iIt",
+     "patient": "enc:v1:Sc8Wb5SZo2MRaE22bqy39-suoj1ns9ADilL1Ju6kkpewgNbOU0lJ",
+     "ts": "24/10/2026, 7:11:48 am"
+    }
+   ]
+  },
+  "smoke": {
+   "patient": "",
+   "inventory": [],
+   "appointments": [],
+   "records": [],
+   "reports": []
+  }
+ },
+ "codes": {
+  "541708bd825645a9b53fe64221a21bafd2522092399e9818bd948fff5707b5ce": {
+   "codeHash": "a4adb1e477ed412a98766e7ba2a4efb4f955789b84f039beeeea937050d70915",
+   "tokenHash": "22782648361f58bba6edb3ca8104337aec7cdffe5dd689248cc1a3178e1c2891",
+   "email": "enc:v1:HjEt1KfVmPK4bQNxK7q1uxiR_-wJ6tu_gSx44h83HFUffdkm49Lauw6AgVFw",
+   "name": "enc:v1:mh79xDLZOq0cFaqnbOwe6JT4MsfV3fl63HaWRxQqPQcAjNesGJM",
+   "pass": "d864e923b8b258b8:b1021334f385b9f0ed2346e079702353810f562278d72fa73a1bd86acd6013d1",
+   "type": "register",
+   "exp": 1792861237501
+  }
+ }
+}
