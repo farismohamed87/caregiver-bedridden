@@ -1,95 +1,216 @@
 <!DOCTYPE html>
 <html lang="ms"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jagaan Pesakit</title>
 <style>
-:root{--c:#0f766e;--l:#e6f7f5;--ink:#10302d}*{box-sizing:border-box}
-body{margin:0;font-family:"Segoe UI",Roboto,sans-serif;background:#f4faf9;color:var(--ink)}
-header{background:var(--c);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-h1{margin:0;font-size:1.25rem}main{max-width:760px;margin:auto;padding:12px 14px 60px}
-.card{background:#fff;border-radius:14px;padding:14px 16px;margin:12px 0;box-shadow:0 2px 6px #0001}
-h3{margin:0 0 8px;color:var(--c)}label{display:block;font-weight:600;margin:10px 0 3px}
-input,textarea,select{width:100%;font:inherit;padding:9px;border:2px solid #b7d8d4;border-radius:10px}
-textarea{min-height:70px}button{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:10px;padding:9px 16px;background:var(--c);color:#fff}
-button.s{background:#fff;color:var(--c);border:2px solid var(--c)}button.d{background:#c0392b}
-nav{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}nav button{background:#fff;color:var(--c);border:2px solid var(--c)}nav button.on{background:var(--c);color:#fff}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:520px){.g2{grid-template-columns:1fr}}
-.ch{display:flex;flex-wrap:wrap;gap:6px}.ch label{margin:0;font-weight:600;border:2px solid #b7d8d4;border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
-.ch input{width:auto}.ch label:has(input:checked){background:var(--l);border-color:var(--c)}
-.err{color:#c0392b;font-weight:700}.ok{color:var(--c);font-weight:700}table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid #ddd;text-align:left}
-.th{display:flex;gap:6px;flex-wrap:wrap}.th img{height:70px;border-radius:8px}.tm{display:flex;gap:6px;margin:4px 0}.tm input{width:auto}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.g3 b{font-size:1.6rem;display:block}.g3 button{font:inherit;cursor:pointer;background:#fff;color:inherit;border:2px solid #d3e8e5;border-radius:12px;padding:8px;transition:.15s}.g3 button:hover{border-color:var(--c);transform:translateY(-2px)}.g3 button.on{border-color:var(--c);background:var(--l)}#iq{margin-top:10px}.it{transition:.15s}.it{border:2px solid #d3e8e5;border-radius:12px;padding:10px 12px;margin:8px 0}.it.low{border-color:#e67e22;background:#fff7ee}.it.out{border-color:#c0392b;background:#fff0ef}.pb{height:10px;background:#e0eceb;border-radius:6px;overflow:hidden;margin:6px 0}.pb i{display:block;height:100%;background:var(--c)}.low .pb i{background:#e67e22}.out .pb i{background:#c0392b}.bg{font-size:.8rem;border-radius:999px;padding:2px 10px;color:#fff;background:var(--c)}.low .bg{background:#e67e22}.out .bg{background:#c0392b}.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.row input{width:90px;text-align:center}.row button{padding:6px 14px}
+:root{--c:#16a34a;--c2:#0d9488;--d:#15803d;--dd:#166534;--l:#f0fdf4;--l2:#dcfce7;--ink:#14532d;--mut:#5f8770;--line:#d5efe0;--sh:0 4px 20px rgba(22,101,52,.08);--sh2:0 8px 26px rgba(22,101,52,.14)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#f3fbf6;
+ background-image:radial-gradient(640px 320px at 8% -8%,rgba(34,197,94,.16),transparent 60%),radial-gradient(560px 280px at 102% 4%,rgba(13,148,136,.12),transparent 60%);
+ background-attachment:fixed}
+::selection{background:#bbf7d0;color:#14532d}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#9fe3bd;border-radius:99px;border:2px solid #f3fbf6}::-webkit-scrollbar-track{background:transparent}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#16a34a 0%,#0d9488 100%);color:#fff;padding:13px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;box-shadow:0 4px 18px rgba(22,101,52,.25)}
+h1{margin:0;font-size:1.25rem;font-weight:800;letter-spacing:.01em;text-shadow:0 1px 2px rgba(0,0,0,.12)}
+#who{display:flex;align-items:center;gap:8px;flex-wrap:wrap}#who .s{background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.45);backdrop-filter:blur(4px);padding:6px 13px;font-size:.86rem;border-radius:999px}#who .s:hover{background:rgba(255,255,255,.28)}
+main{max-width:780px;margin:auto;padding:18px 16px 70px;position:relative;z-index:1}
+.card{background:var(--card);border:1px solid rgba(22,163,74,.13);border-radius:18px;padding:18px 20px;margin:16px 0;box-shadow:var(--sh);transition:box-shadow .25s}
+.card:hover{box-shadow:var(--sh2)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card{animation:fadeUp .35s ease both}
+h3{margin:0 0 12px;color:var(--dd);font-size:1.05rem;font-weight:800;display:flex;align-items:center;gap:8px}
+h3::before{content:"";width:6px;height:20px;border-radius:99px;background:linear-gradient(180deg,#22c55e,var(--c2));flex:none}
+label{display:block;font-weight:650;margin:12px 0 4px;font-size:.9rem;color:#2f5c48}
+input,textarea,select{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:#fbfefc;color:var(--ink);transition:border-color .18s,box-shadow .18s}
+input:hover,textarea:hover,select:hover{border-color:#a7d9c0}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--c);box-shadow:0 0 0 3.5px rgba(22,163,74,.16);background:#fff}
+input:disabled{background:#eef8f2;color:#456b57;cursor:not-allowed;border-color:#dcefe4}
+input[type=file]{padding:9px;border:2px dashed #a7d9c0;border-radius:12px;background:#f4fbf7;cursor:pointer}
+input[type=file]::file-selector-button{font:inherit;font-weight:700;margin-right:10px;padding:6px 14px;border:0;border-radius:8px;background:var(--l2);color:var(--dd);cursor:pointer}
+textarea{min-height:74px;resize:vertical}
+button{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:12px;padding:10px 18px;background:linear-gradient(135deg,#22c55e,var(--d));color:#fff;box-shadow:0 3px 10px rgba(22,163,74,.32);transition:transform .15s,box-shadow .15s,filter .15s}
+button:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(22,163,74,.4);filter:brightness(1.04)}
+button:active{transform:translateY(0)}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+button.s{background:#fff;color:var(--d);border:2px solid #b7e2c8;box-shadow:0 1px 4px rgba(22,101,52,.08)}
+button.s:hover{background:var(--l);border-color:var(--c)}
+button.d{background:linear-gradient(135deg,#f87171,#dc2626);box-shadow:0 3px 10px rgba(220,38,38,.28)}
+button.d:hover{box-shadow:0 6px 16px rgba(220,38,38,.38);filter:brightness(1.05)}
+nav{display:flex;gap:8px;margin:4px 0 16px;flex-wrap:wrap}
+nav button{background:#fff;color:var(--d);border:2px solid transparent;box-shadow:0 1px 6px rgba(22,101,52,.1);border-radius:999px;padding:8px 16px;font-size:.92rem}
+nav button:hover{background:var(--l);border-color:#b7e2c8}
+nav button.on{background:linear-gradient(135deg,#22c55e,var(--d));color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(22,163,74,.35)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:#dc2626;font-weight:700}.ok{color:var(--d);font-weight:700}
+table{width:100%;border-collapse:collapse}
+th{padding:10px 8px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:#3d7358;border-bottom:2px solid #d9efe3}
+td{padding:11px 8px;border-bottom:1px solid #e7f5ed;vertical-align:middle}
+tr:hover td{background:#f2fbf6}
+.th{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.th img{height:76px;border-radius:12px;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.14)}
+.tm{display:flex;gap:8px;margin:6px 0}.tm input{width:auto;padding:8px 10px;border-radius:10px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+.g3 b{font-size:1.7rem;display:block;line-height:1.1}
+.g3 button{font:inherit;cursor:pointer;background:linear-gradient(180deg,#fff,#f6fdf9);color:var(--ink);border:2px solid #d9efe3;border-radius:16px;padding:12px 8px;box-shadow:0 1px 4px rgba(22,101,52,.06);transition:.18s}
+.g3 button:hover{border-color:var(--c);transform:translateY(-3px);box-shadow:0 8px 18px rgba(22,101,52,.14)}
+.g3 button.on{border-color:var(--c);background:linear-gradient(180deg,var(--l),var(--l2));box-shadow:inset 0 0 0 1px rgba(22,163,74,.2)}
+#iq{margin-top:12px}
+.it{border:1.5px solid #d9efe3;border-radius:16px;padding:14px 16px;margin:10px 0;background:linear-gradient(180deg,#fff,#fbfefc);transition:box-shadow .2s,transform .2s,border-color .2s;animation:fadeUp .3s ease both}
+.it:hover{box-shadow:0 6px 18px rgba(22,101,52,.1);transform:translateY(-1px)}
+.it.low{border-color:#fcd9a4;background:linear-gradient(180deg,#fffdf6,#fff8eb)}
+.it.out{border-color:#f5c2c0;background:linear-gradient(180deg,#fffbfb,#fff2f1)}
+.pb{height:10px;background:#e5f6ec;border-radius:99px;overflow:hidden;margin:8px 0}
+.pb i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#4ade80,var(--c))}
+.low .pb i{background:linear-gradient(90deg,#fbbf24,#d97706)}.out .pb i{background:linear-gradient(90deg,#f87171,#dc2626)}
+.bg{font-size:.76rem;font-weight:800;letter-spacing:.03em;border-radius:999px;padding:3px 12px;background:var(--l2);color:var(--dd)}
+.low .bg{background:#fef3c7;color:#b45309}.out .bg{background:#fee2e2;color:#b91c1c}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row input{width:92px;text-align:center}.row button{padding:7px 14px;border-radius:10px}
+small{color:var(--mut)}
+.fchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+button.fchip,span.fchip{display:inline-flex;align-items:center;gap:6px;background:var(--l);border:1.5px solid #b7e2c8;border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:650;color:var(--dd);box-shadow:none;animation:fadeUp .25s ease both}
+button.fchip:hover{background:var(--l2);border-color:var(--c);transform:none;filter:none;box-shadow:0 2px 8px rgba(22,101,52,.16)}
+.fchip i{cursor:pointer;font-style:normal;font-weight:800;color:#dc2626;font-size:1rem;line-height:1;padding:0 2px}
+.fchip i:hover{color:#b91c1c}
+.fchip.rm{opacity:.55}.fchip.rm i{color:var(--d)}
+p[style]{color:var(--mut)}
+.login{max-width:400px;margin:52px auto;text-align:center;animation:fadeUp .4s ease both}
+.login h3{justify-content:center}.login h3::before{display:none}
+.login label{text-align:left}
+.login button{width:100%;padding:12px;margin-top:8px}
+.logo{width:68px;height:68px;margin:0 auto 14px;border-radius:22px;background:linear-gradient(135deg,#22c55e,#0d9488);display:grid;place-items:center;font-size:2rem;box-shadow:0 10px 24px rgba(22,163,74,.38)}
+@media(max-width:520px){.g2{grid-template-columns:1fr}h1{font-size:1.05rem}main{padding:10px 10px 60px}.card{padding:14px 14px;border-radius:16px}nav button{padding:7px 13px;font-size:.86rem}}
 </style></head><body>
 <header><h1 id="title">🏥 Jagaan Pesakit</h1><div id="who"></div></header><main id="v"></main>
 <script>
 const $=s=>document.querySelector(s),V=$("#v");let me=null,tab="form",tok="";try{tok=localStorage.getItem("tk")||""}catch{}
 const TX={
  ms:{appTitle:"🏥 Jagaan Pesakit",logout:"Keluar",tabForm:"📝 Borang",tabInventory:"📦 Inventori",tabHistory:"📂 Sejarah",tabUsers:"👥 Pengguna",tabPatient:"🧑🦽 Pesakit",patientTitle:"Nama Pesakit (Super Admin)",patientHint:"Nama ini diisi automatik dalam borang untuk semua pengguna.",save:"Simpan",patientSaved:"Nama pesakit disimpan ✅",alertTitle:"Bacaan tidak normal",alertTempHigh:"Suhu tinggi",alertTempLow:"Suhu rendah",alertSpo2Low:"Oksigen rendah",alertBpHigh:"Tekanan darah tinggi",alertBpLow:"Tekanan darah rendah",alertHrHigh:"Kadar jantung tinggi",alertHrLow:"Kadar jantung rendah",alertSugarHigh:"Gula tinggi",alertSugarLow:"Gula rendah",alertConfirm:"Bacaan tidak normal dikesan. Hantar laporan juga?",normalVitals:"Bacaan dalam julat normal ✅",
-  loginTitle:"Log Masuk",username:"Username",password:"Kata laluan",loginBtn:"Log masuk",
+  loginTitle:"Log Masuk",loginId:"E-mel / Pengguna",loginIdPh:"nama@email.com atau username",username:"Username",password:"Kata laluan",loginBtn:"Log masuk",
   info:"Maklumat",patientName:"Nama pesakit",caretaker:"Nama penjaga",shiftInfo:"Maklumat Syif",shiftStart:"Mula syif",shiftEnd:"Tamat syif",
   condition:"Keadaan Pesakit",temp:"Suhu (°C)",spo2:"SpO2 / Oksigen (%)",bp:"Tekanan darah",hr:"Kadar jantung (bpm)",sugar:"Gula (mmol/L)",cough:"Batuk",no:"Tiada",yes:"Ada",others:"Lain-lain",
-  tasks:"Tugas Penjaga",milk:"Bagi susu (masa)",pampers:"Tukar pampers (masa)",bedsoreQ:"Ada kesan bedsore?",attach:"Ambil gambar",
+  tasks:"Tugas Penjaga",milk:"Bagi susu (masa)",pampers:"Tukar pampers (masa)",bath:"Mandian katil / span (masa)",bedsoreQ:"Ada kesan bedsore?",attach:"Ambil gambar",
   meds:"Bagi ubat (masa)",right:"Mengiring ke kanan (masa)",left:"Mengiring ke kiri (masa)",other:"Lain-lain",handover:"Nota Serah Tugas",addTime:"+ Masa",
   submit:"Hantar laporan",submitting:"Menghantar…",saved:"✅ Laporan disimpan",wa:"📲 Hantar ke WhatsApp",viewPrint:"Lihat / Cetak laporan",newForm:"Borang baharu",
-  historyTitle:"Sejarah laporan",loading:"Memuatkan…",date:"Tarikh",patientCol:"Pesakit",caretakerCol:"Penjaga",open:"Buka",noReports:"Tiada laporan lagi.",
+  historyTitle:"Sejarah laporan",loading:"Memuatkan…",date:"Tarikh",patientCol:"Pesakit",caretakerCol:"Penjaga",open:"Buka",noReports:"Tiada laporan lagi.",delReportQ:"Padam laporan ini?",delAllReports:"Padam semua sejarah",delAllReportsQ:"Padam SEMUA sejarah laporan? Tindakan ini tidak boleh dibatalkan.",
   invTitle:"📦 Dashboard Inventori",totalItems:"Jumlah item",lowStock:"Stok rendah",outStock:"Habis",addItemAdmin:"Tambah item (super admin)",
   itemName:"Nama item",unit:"Unit",itemNamePh:"cth: Pampers",unitPh:"cth: pek / tin / biji",initialStock:"Stok awal",minStock:"Stok minimum (amaran)",add:"Tambah",
   stockOnly:"Anda boleh kemas kini bilangan stok sahaja.",invList:"Senarai inventori",out:"Habis",low:"Rendah",enough:"Cukup",minLabel:"min",edit:"Edit",delete:"Padam",
   updated:"Kemas kini:",by:"oleh",noItems:"Tiada item lagi.",askAdmin:" Minta super admin tambah item.",itemNamePrompt:"Nama item",unitPrompt:"Unit",
   minPrompt:"Stok minimum (amaran)",deleteItemQ:"Padam item ini?",
-  createUser:"Cipta pengguna (caregiver)",fullName:"Nama penuh",passwordMin:"Kata laluan (min 6)",create:"Cipta",userList:"Senarai pengguna",userCreated:"Pengguna dicipta ✅",deleteUserQ:"Padam {n}?",searchItem:"🔍 Cari item…",noMatch:"Tiada item sepadan.",allItems:"Semua"},
+  createUser:"Cipta pengguna (caregiver)",fullName:"Nama penuh",passwordMin:"Kata laluan (min 6)",create:"Cipta",userList:"Senarai pengguna",userCreated:"Pengguna dicipta ✅",deleteUserQ:"Padam {n}?",searchItem:"🔍 Cari item…",noMatch:"Tiada item sepadan.",allItems:"Semua",
+  tabAppointments:"📅 Temujanji",apptTitle:"📅 Temujanji",apptAddAdmin:"Tambah temujanji (super admin)",apptTitleLabel:"Tajuk temujanji",apptDateLabel:"Tarikh & masa",apptTitlePh:"cth: Jumpa doktor pakar",apptViewOnly:"Hanya super admin boleh menambah / mengemas kini temujanji. Anda boleh lihat sahaja untuk makluman.",apptList:"Senarai temujanji",noAppts:"Tiada temujanji lagi.",deleteApptQ:"Padam temujanji ini?",apptTitlePrompt:"Tajuk temujanji",apptDatePrompt:"Tarikh & masa",updatedAppt:"Dikemas kini:",
+  tabRecords:"📁 Rekod Perubatan",recAdd:"Tambah rekod perubatan (super admin)",recEdit:"Sunting rekod perubatan",recList:"Senarai rekod perubatan",recTitleLbl:"Tajuk rekod",recTitlePh:"cth: Laporan X-Ray dada",recCat:"Kategori",recDate:"Tarikh rekod",recNotes:"Catatan",recFiles:"Fail (PDF / gambar)",recViewOnly:"Hanya super admin boleh menambah / mengemas kini rekod perubatan. Anda boleh lihat dan buka fail sahaja.",noRecs:"Tiada rekod perubatan lagi.",delRecQ:"Padam rekod ini beserta semua fail?",delFileQ:"Padam fail ini?",catLab:"Makmal",catImaging:"Imaging (X-Ray / USG)",catRx:"Resep ubat",catDoctor:"Nota doktor",catOther:"Lain-lain",fileTooBig:"Fail terlalu besar (maks 12MB)",badType:"Hanya PDF atau gambar sahaja",undo:"Batal padam",cancel:"Batal",
+  email:"E-mel",code:"Kod pengesahan",regTitle:"Daftar Akaun Baharu",setPwdTitle:"Tetapkan Kata Laluan",regBtn:"Daftar & hantar e-mel",sendCode:"Hantar kod pengesahan",
+  codeSent:"Kod pengesahan dihantar ke e-mel anda ✅",codeShown:"SMTP belum dikonfigurasi — kod anda: {c}",setupLink:"Aktifkan dengan kod setup",
+  regSent:"Pendaftaran diterima. Sila semak e-mel anda dan klik pautan pengesahan untuk melengkapkan pendaftaran ✅",
+  regLinkShown:"SMTP belum dikonfigurasi — buka pautan ini untuk mengesahkan: {l}",
+  noAccount:"Belum ada akaun? Daftar",haveAccount:"Sudah ada akaun? Log masuk",setPwdBtn:"Tetapkan kata laluan",
+  setupSent:"Kod setup dihantar ke e-mel pengguna ✅",setupCodeLabel:"Kod setup: {c} — hantar kepada pengguna",
+  addUserTitle:"Tambah pengguna",addUserBtn:"Tambah pengguna",usersHint:"Super admin hanya boleh menambah penjaga. Akaun Super Admin hanya boleh dicipta oleh Master Admin. E-mel pilihan sahaja.",
+  userEmail:"E-mel (pilihan)",userUsername:"Username",userUsernamePh:"cth: siti",userPassword:"Kata laluan",userRole:"Jenis akaun",newPwdPrompt:"Masukkan kata laluan baharu untuk {n} (min 6 aksara):",pwdResetDone:"Kata laluan dikemas kini ✅",status:"Status",statusActive:"Aktif",statusPending:"Menunggu kod",resend:"Hantar semula kod",resetPwd:"Reset kata laluan",resetPwdQ:"Reset kata laluan untuk {n}? Kata laluan lama tidak akan berfungsi.",resetSent:"Kod setup baharu dihantar ke e-mel pengguna ✅",noUsers:"Tiada pengguna lagi.",
+     masterTitle:"👑 Dashboard Master Admin",masterHint:"Urus akaun Super Admin sahaja. Master admin tidak boleh mengakses dashboard pesakit.",masterAddTitle:"Tambah Super Admin",masterList:"Senarai Super Admin",masterNoAdmins:"Tiada akaun Super Admin lagi.",masterDeleteQ:"Padam Super Admin {n}? Akaun mereka, penjaga di bawahnya dan data dashboard akan dipadam.",masterResetQ:"Kata laluan baharu untuk {n} (min 6 aksara):",masterResetDone:"Kata laluan Super Admin dikemas kini ✅",masterTempPwd:"Kata laluan baharu: {p}",caregiversLabel:"Penjaga",
+   roleAdmin:"Super Admin",roleCaregiver:"Penjaga",tabSettings:"⚙️ Tetapan",settingsTitle:"⚙️ Tetapan Telegram (pilihan)",settingsHint:"Sambungkan bot Telegram sendiri untuk menerima laporan pesakit. Tetapan ini hanya untuk akaun anda dan pilihan sahaja.",tgToken:"Bot token",tgTokenPh:"Token bot daripada @BotFather",tgChat:"Chat ID",tgChatPh:"cth: -1001234567890",tgKeep:"Biarkan token kosong untuk mengekalkan token sedia ada. Isi kedua-dua ruang untuk aktifkan Telegram.",tgTokenSaved:"Token disimpan (…{c})",tgSaved:"Tetapan Telegram disimpan ✅",tgOff:"Telegram dimatikan untuk akaun ini.",tgClearQ:"Padam tetapan Telegram akaun ini?",tgClear:"Padam tetapan",tgHow:"Cipta bot melalui @BotFather, tambah bot ke group/chat, kemudian masukkan token dan chat ID di sini.",workspaceInfo:"Ruang kerja peribadi",patientSetByAdmin:"Super admin perlu menetapkan nama pesakit dahulu."},
  en:{appTitle:"🏥 Patient Care",logout:"Logout",tabForm:"📝 Form",tabInventory:"📦 Inventory",tabHistory:"📂 History",tabUsers:"👥 Users",tabPatient:"🧑🦽 Patient",patientTitle:"Patient Name (Super Admin)",patientHint:"This name is auto-filled in the form for all users.",save:"Save",patientSaved:"Patient name saved ✅",alertTitle:"Abnormal readings",alertTempHigh:"High temperature",alertTempLow:"Low temperature",alertSpo2Low:"Low oxygen",alertBpHigh:"High blood pressure",alertBpLow:"Low blood pressure",alertHrHigh:"High heart rate",alertHrLow:"Low heart rate",alertSugarHigh:"High sugar",alertSugarLow:"Low sugar",alertConfirm:"Abnormal reading detected. Submit the report anyway?",normalVitals:"Readings within normal range ✅",
-  loginTitle:"Sign In",username:"Username",password:"Password",loginBtn:"Sign in",
+  loginTitle:"Sign In",loginId:"Email / User",loginIdPh:"name@email.com or username",username:"Username",password:"Password",loginBtn:"Sign in",
   info:"Information",patientName:"Patient name",caretaker:"Caretaker name",shiftInfo:"Shift Information",shiftStart:"Shift start",shiftEnd:"Shift end",
   condition:"Patient Condition",temp:"Temperature (°C)",spo2:"SpO2 / Oxygen (%)",bp:"Blood pressure",hr:"Heart rate (bpm)",sugar:"Sugar (mmol/L)",cough:"Cough",no:"No",yes:"Yes",others:"Others",
-  tasks:"Carer Tasks",milk:"Milk feeding (time)",pampers:"Change pampers (time)",bedsoreQ:"Any bedsore noticed?",attach:"Snap picture",
+  tasks:"Carer Tasks",milk:"Milk feeding (time)",pampers:"Change pampers (time)",bath:"Bed bath / sponge bath (time)",bedsoreQ:"Any bedsore noticed?",attach:"Snap picture",
   meds:"Give medicine (time)",right:"Turn to right (time)",left:"Turn to left (time)",other:"Other",handover:"Handover Notes",addTime:"+ Time",
   submit:"Submit report",submitting:"Submitting…",saved:"✅ Report saved",wa:"📲 Send to WhatsApp",viewPrint:"View / Print report",newForm:"New form",
-  historyTitle:"Report history",loading:"Loading…",date:"Date",patientCol:"Patient",caretakerCol:"Caretaker",open:"Open",noReports:"No reports yet.",
+  historyTitle:"Report history",loading:"Loading…",date:"Date",patientCol:"Patient",caretakerCol:"Caretaker",open:"Open",noReports:"No reports yet.",delReportQ:"Delete this report?",delAllReports:"Delete all history",delAllReportsQ:"Delete ALL report history? This cannot be undone.",
   invTitle:"📦 Inventory Dashboard",totalItems:"Total items",lowStock:"Low stock",outStock:"Out of stock",addItemAdmin:"Add item (super admin)",
   itemName:"Item name",unit:"Unit",itemNamePh:"e.g. Pampers",unitPh:"e.g. pack / tin / pcs",initialStock:"Initial stock",minStock:"Minimum stock (alert)",add:"Add",
   stockOnly:"You can only update stock quantities.",invList:"Inventory list",out:"Out",low:"Low",enough:"Enough",minLabel:"min",edit:"Edit",delete:"Delete",
   updated:"Updated:",by:"by",noItems:"No items yet.",askAdmin:" Ask a super admin to add items.",itemNamePrompt:"Item name",unitPrompt:"Unit",
   minPrompt:"Minimum stock (alert)",deleteItemQ:"Delete this item?",
-  createUser:"Create user (caregiver)",fullName:"Full name",passwordMin:"Password (min 6)",create:"Create",userList:"User list",userCreated:"User created ✅",deleteUserQ:"Delete {n}?",searchItem:"🔍 Search items…",noMatch:"No matching items.",allItems:"All"}
+  createUser:"Create user (caregiver)",fullName:"Full name",passwordMin:"Password (min 6)",create:"Create",userList:"User list",userCreated:"User created ✅",deleteUserQ:"Delete {n}?",searchItem:"🔍 Search items…",noMatch:"No matching items.",allItems:"All",
+  tabAppointments:"📅 Appointments",apptTitle:"📅 Appointments",apptAddAdmin:"Add appointment (super admin)",apptTitleLabel:"Appointment title",apptDateLabel:"Date & time",apptTitlePh:"e.g. Specialist doctor visit",apptViewOnly:"Only super admin can add / update appointments. You can view for awareness.",apptList:"Appointment list",noAppts:"No appointments yet.",deleteApptQ:"Delete this appointment?",apptTitlePrompt:"Appointment title",apptDatePrompt:"Date & time",updatedAppt:"Updated:",
+  tabRecords:"📁 Medical Record",recAdd:"Add medical record (super admin)",recEdit:"Edit medical record",recList:"Medical record list",recTitleLbl:"Record title",recTitlePh:"e.g. Chest X-Ray report",recCat:"Category",recDate:"Record date",recNotes:"Notes",recFiles:"Files (PDF / image)",recViewOnly:"Only super admin can add / update medical records. You can view and open files only.",noRecs:"No medical records yet.",delRecQ:"Delete this record with all its files?",delFileQ:"Delete this file?",catLab:"Laboratory",catImaging:"Imaging (X-Ray / USG)",catRx:"Prescription",catDoctor:"Doctor's note",catOther:"Other",fileTooBig:"File too large (max 12MB)",badType:"PDF or images only",undo:"Undo",cancel:"Cancel",
+  email:"Email",code:"Verification code",regTitle:"Register New Account",setPwdTitle:"Set Your Password",regBtn:"Register & send email",sendCode:"Send verification code",
+  codeSent:"Verification code sent to your email ✅",codeShown:"SMTP not configured — your code: {c}",setupLink:"Activate with setup code",
+  regSent:"Registration received. Please check your email and click the verification link to complete your registration ✅",
+  regLinkShown:"SMTP not configured — open this link to verify: {l}",
+  noAccount:"No account? Register",haveAccount:"Already have an account? Sign in",setPwdBtn:"Set password",
+  setupSent:"Setup code sent to the user's email ✅",setupCodeLabel:"Setup code: {c} — send it to the user",
+  addUserTitle:"Add user",addUserBtn:"Add user",usersHint:"Super admins can only add caregivers. Super Admin accounts can only be created by the Master Admin. Email is optional.",
+  userEmail:"Email (optional)",userUsername:"Username",userUsernamePh:"e.g. siti",userPassword:"Password",userRole:"Account type",newPwdPrompt:"Enter a new password for {n} (min 6 characters):",pwdResetDone:"Password updated ✅",status:"Status",statusActive:"Active",statusPending:"Awaiting code",resend:"Resend code",resetPwd:"Reset password",resetPwdQ:"Reset the password for {n}? The old password will stop working.",resetSent:"A new setup code was sent to the user's email ✅",noUsers:"No users yet.",
+     masterTitle:"👑 Master Admin Dashboard",masterHint:"Manage Super Admin accounts only. Master admin cannot access patient dashboards.",masterAddTitle:"Add Super Admin",masterList:"Super Admin list",masterNoAdmins:"No Super Admin accounts yet.",masterDeleteQ:"Delete Super Admin {n}? Their account, caregivers under them and dashboard data will be deleted.",masterResetQ:"New password for {n} (min 6 characters):",masterResetDone:"Super Admin password updated ✅",masterTempPwd:"New password: {p}",caregiversLabel:"Caregivers",
+   roleAdmin:"Super Admin",roleCaregiver:"Caregiver",tabSettings:"⚙️ Settings",settingsTitle:"⚙️ Telegram Settings (optional)",settingsHint:"Connect your own Telegram bot to receive patient reports. These settings apply only to your account and are optional.",tgToken:"Bot token",tgTokenPh:"Bot token from @BotFather",tgChat:"Chat ID",tgChatPh:"e.g. -1001234567890",tgKeep:"Leave the token blank to keep the existing token. Fill both fields to enable Telegram.",tgTokenSaved:"Token saved (…{c})",tgSaved:"Telegram settings saved ✅",tgOff:"Telegram is disabled for this account.",tgClearQ:"Delete this account's Telegram settings?",tgClear:"Delete settings",tgHow:"Create a bot with @BotFather, add it to a group/chat, then enter the token and chat ID here.",workspaceInfo:"Your private workspace",patientSetByAdmin:"Super admin must set the patient name first."}
 };
 let lang="ms";try{lang=localStorage.getItem("lang")==="en"?"en":"ms"}catch{}
 const t=k=>(TX[lang]&&TX[lang][k])||TX.ms[k]||k;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function chrome(){document.documentElement.lang=lang;document.title=t("appTitle");$("#title").textContent=t("appTitle");$("#who").innerHTML=(me?esc(me.name)+" ":"")+`<button class="s" onclick="toggleLang()">🌐 ${lang==="ms"?"EN":"BM"}</button>`+(me?` <button class="s" onclick="logout()">${t("logout")}</button>`:"")}
+function chrome(){document.documentElement.lang=lang;document.title=t("appTitle");$("#title").textContent=t("appTitle");$("#who").innerHTML=(me?`<span class="s" style="cursor:default">${esc(me.name)}${me.email?" · "+esc(me.email):""}</span> `:"")+`<button class="s" onclick="toggleLang()">🌐 ${lang==="ms"?"EN":"BM"}</button>`+(me?` <button class="s" onclick="logout()">${t("logout")}</button>`:"")}
 function snap(){if(!$("#patient"))return null;const s={raw:{},times:{},photos:PH.slice(),bs:$("#bs").value};
  ["patient","ss","se","temp","spo2","bp","hr","sugar","cough","others","bs","ot","ho"].forEach(id=>{const e=$("#"+id);if(e)s.raw[id]=e.value});
- ["milk","pampers","meds","right","left"].forEach(id=>{const c=$("#"+id);if(c)s.times[id]=[...c.querySelectorAll("input")].map(x=>x.value)});return s}
+ ["milk","pampers","bath","meds","right","left"].forEach(id=>{const c=$("#"+id);if(c)s.times[id]=[...c.querySelectorAll("input")].map(x=>x.value)});return s}
 function restore(s){if(!s||!$("#patient"))return;
  ["patient","ss","se","temp","spo2","bp","hr","sugar","cough","others","bs","ot","ho"].forEach(id=>{const e=$("#"+id);if(e&&s.raw[id]!==undefined)e.value=s.raw[id]});
- ["milk","pampers","meds","right","left"].forEach(id=>{const c=$("#"+id);if(!c||!s.times[id])return;c.innerHTML="";s.times[id].forEach(v=>c.insertAdjacentHTML("beforeend",`<div class="tm"><input type="time" value="${esc(v)}"></div>`))});
+ ["milk","pampers","bath","meds","right","left"].forEach(id=>{const c=$("#"+id);if(!c||!s.times[id])return;c.innerHTML="";s.times[id].forEach(v=>c.insertAdjacentHTML("beforeend",`<div class="tm"><input type="time" value="${esc(v)}"></div>`))});
  PH=s.photos||[];const th=$("#th");if(th)th.innerHTML=PH.map(p=>`<img src="${p}">`).join("");$("#bsx").style.display=s.bs==="yes"?"block":"none"}
 function toggleLang(){const s=snap();lang=lang==="ms"?"en":"ms";try{localStorage.setItem("lang",lang)}catch{}if(me){app().then(()=>restore(s))}else{chrome();login()}}
 async function api(p,m="GET",b){const r=await fetch("/api"+p,{method:m,headers:{"Content-Type":"application/json",Authorization:"Bearer "+tok,"X-Lang":lang},body:b?JSON.stringify(b):undefined});
   const x=await r.text();if(r.status===401&&me){logout();throw new Error(lang==="en"?"Session ended":"Sesi tamat")}if(!r.ok)throw new Error((()=>{try{return JSON.parse(x).error}catch{return x}})());return r.headers.get("content-type").includes("json")?JSON.parse(x):x}
-function logout(){tok="";me=null;try{localStorage.removeItem("tk")}catch{}init()}
-async function init(){chrome();if(tok){try{me=await api("/me")}catch{me=null}}me?app():login()}
-function login(e=""){V.innerHTML=`<div class="card" style="max-width:380px;margin:40px auto"><h3>${t("loginTitle")}</h3><label>${t("username")}</label><input id="u" autocomplete="username"><label>${t("password")}</label><input id="p" type="password" autocomplete="current-password"><p class="err">${esc(e)}</p><button id="b" style="width:100%">${t("loginBtn")}</button></div>`;
-  $("#p").onkeydown=e=>{if(e.key==="Enter")$("#b").click()};
-  $("#b").onclick=async()=>{try{const r=await api("/login","POST",{username:$("#u").value.trim().toLowerCase(),password:$("#p").value});tok=r.token;try{localStorage.setItem("tk",tok)}catch{}me=r.user;app()}catch(x){login(x.message)}}}
+function logout(){tok="";me=null;tab="form";try{localStorage.removeItem("tk")}catch{}init()}
+async function init(){chrome();if(tok){try{me=await api("/me")}catch{me=null}}me?app():auth("login")}
+function auth(mode="login",e=""){
+ const head=`<div class="card login"><div class="logo">🏥</div>`;
+ if(mode==="login")V.innerHTML=head+`<h3>${t("loginTitle")}</h3><label>${t("loginId")}</label><input id="u" type="text" autocomplete="username" placeholder="${t("loginIdPh")}"><label>${t("password")}</label><input id="p" type="password" autocomplete="current-password"><p class="err" id="ae">${esc(e)}</p><button id="b">${t("loginBtn")}</button>
+  <p style="margin-top:14px"><a href="#" onclick="auth('register');return false">${t("noAccount")}</a> · <a href="#" onclick="auth('setup');return false">${t("setupLink")}</a></p></div>`;
+ if(mode==="register")V.innerHTML=head+`<h3>${t("regTitle")}</h3><label>${t("fullName")}</label><input id="nm" autocomplete="name"><label>${t("email")}</label><input id="u" type="email" autocomplete="email" placeholder="nama@email.com"><label>${t("password")}</label><input id="p" type="password" autocomplete="new-password"><p class="err" id="ae">${esc(e)}</p><p id="ao"></p><button id="b" style="width:100%;margin-top:8px">${t("regBtn")}</button>
+  <p style="margin-top:14px"><a href="#" onclick="auth('login');return false">${t("haveAccount")}</a></p></div>`;
+ if(mode==="setup")V.innerHTML=head+`<h3>${t("setPwdTitle")}</h3><label>${t("email")}</label><input id="u" type="email" autocomplete="email" placeholder="nama@email.com"><label>${t("fullName")}</label><input id="nm" autocomplete="name"><label>${t("code")}</label><input id="cd" inputmode="numeric" autocomplete="one-time-code"><label>${t("password")}</label><input id="p" type="password" autocomplete="new-password"><p class="err" id="ae">${esc(e)}</p><button id="b" style="width:100%;margin-top:8px">${t("setPwdBtn")}</button>
+  <p style="margin-top:14px"><a href="#" onclick="auth('login');return false">${t("haveAccount")}</a></p></div>`;
+ const err=x=>{const el=$("#ae");if(el)el.textContent=(x&&x.message)||x||""};
+ const done=r=>{tok=r.token;try{localStorage.setItem("tk",tok)}catch{}me=r.user;app()};
+ if(mode==="login"){$("#p").onkeydown=ev=>{if(ev.key==="Enter")$("#b").click()};
+  $("#b").onclick=async()=>{try{done(await api("/login","POST",{email:$("#u").value.trim(),password:$("#p").value}))}catch(x){err(x)}}}
+ if(mode==="register"){
+  $("#b").onclick=async()=>{try{const r=await api("/register","POST",{name:$("#nm").value.trim(),email:$("#u").value.trim(),password:$("#p").value});
+   $("#ao").innerHTML=`<span class="ok">${t("regSent")}</span>`+(r.link?`<br><span class="err">${t("regLinkShown").replace("{l}",`<a href="${esc(r.link)}">${esc(r.link)}</a>`)}</span>`:"")+(r.code?`<br><span class="err">${t("codeShown").replace("{c}",esc(r.code))}</span>`:"")}catch(x){err(x)}}}
+ if(mode==="setup"){
+  $("#b").onclick=async()=>{try{done(await api("/setup","POST",{email:$("#u").value.trim(),name:$("#nm").value.trim(),code:$("#cd").value.trim(),password:$("#p").value}))}catch(x){err(x)}}}}
+function login(e=""){auth("login",e)}
 function app(){chrome();
-  return (async()=>{try{PATIENT=(await api("/patient")).name||""}catch{}
-  const T=[["form",t("tabForm")],["inv",t("tabInventory")],["hist",t("tabHistory")],...(me.role==="admin"?[["usr",t("tabUsers")],["pat",t("tabPatient")]]:[])];
-  V.innerHTML=`<nav>${T.map(([k,l])=>`<button class="${k===tab?"on":""}" onclick="tab='${k}';app()">${l}</button>`).join("")}</nav><div id="c"></div>`;({form,hist,usr,inv,pat})[tab]()})()}
+  return (async()=>{if(me.role==="master"){V.innerHTML=`<div id="c"></div>`;return master()}
+  try{PATIENT=(await api("/patient")).name||""}catch{}
+  const T=[["form",t("tabForm")],["inv",t("tabInventory")],["hist",t("tabHistory")],["appt",t("tabAppointments")],["rec",t("tabRecords")],...(me.role==="admin"?[["usr",t("tabUsers")],["pat",t("tabPatient")],["settings",t("tabSettings")]]:[])];
+  if(!T.some(([k])=>k===tab))tab="form";
+  V.innerHTML=`<nav>${T.map(([k,l])=>`<button class="${k===tab?"on":""}" onclick="tab='${k}';app()">${l}</button>`).join("")}</nav><div id="c"></div>`;({form,hist,usr,inv,pat,appt,rec,settings})[tab]()})()}
 // ---- Form
 let PH=[],WA="",PATIENT="";
 const fld=(id,l,ty="text",ph="")=>`<div><label>${l}</label><input id="${id}" type="${ty}" placeholder="${ph}"></div>`;
-function form(){PH=[];$("#c").innerHTML=`<div class="card"><h3>${t("info")}</h3><label>${t("patientName")}</label><input id="patient" value="${esc(PATIENT)}" disabled><label>${t("caretaker")}</label><input value="${esc(me.name)}" disabled></div>
+const DRAFT_FIELDS=["patient","ss","se","temp","spo2","bp","hr","sugar","cough","others","bs","ot","ho"],DRAFT_TASKS=["milk","pampers","bath","meds","right","left"];
+let DT,draftNoPhotos=false;
+const draftKey=()=>"draft:"+((me&&me.username)||"anon");
+function draftData(){const f={},t={};DRAFT_FIELDS.forEach(id=>{const e=$("#"+id);if(e)f[id]=e.value});DRAFT_TASKS.forEach(id=>t[id]=times(id));return{f,t,photos:draftNoPhotos?[]:PH}}
+function saveDraft(){if(tab!=="form"||!$("#sub"))return;const d=draftData();try{localStorage.setItem(draftKey(),JSON.stringify(d))}catch{draftNoPhotos=true;d.photos=[];try{localStorage.setItem(draftKey(),JSON.stringify(d))}catch{}}}
+function scheduleDraft(){clearTimeout(DT);DT=setTimeout(saveDraft,200)}
+function clearDraft(){try{localStorage.removeItem(draftKey())}catch{}}
+function updateDraftPatient(v){try{const d=JSON.parse(localStorage.getItem(draftKey())||"null");if(d&&d.f){d.f.patient=v;localStorage.setItem(draftKey(),JSON.stringify(d))}}catch{}}
+window.addEventListener("beforeunload",()=>{if(tab==="form")saveDraft()});document.addEventListener("visibilitychange",()=>{if(document.hidden&&tab==="form")saveDraft()});
+function restoreDraft(){let d;try{d=JSON.parse(localStorage.getItem(draftKey())||"null")}catch{}if(!d)return;const f=d.f||{};DRAFT_FIELDS.forEach(id=>{const e=$("#"+id);if(e&&f[id]!==undefined&&!(id==="patient"&&!adm()))e.value=f[id]});const t=d.t||{};DRAFT_TASKS.forEach(id=>{const c=$("#"+id),v=t[id];if(c&&Array.isArray(v)&&v.length){c.innerHTML="";v.forEach(x=>c.insertAdjacentHTML("beforeend",`<div class="tm"><input type="time" value="${esc(x)}"></div>`))}});if(Array.isArray(d.photos)&&d.photos.length){PH=d.photos;$("#th").innerHTML=PH.map(p=>`<img src="${esc(p)}">`).join("")}const bs=$("#bs");if(bs)$("#bsx").style.display=bs.value==="yes"?"block":"none"}
+function form(){PH=[];$("#c").innerHTML=`<div class="card"><h3>${t("info")}</h3><label>${t("patientName")}</label><input id="patient" value="${esc(PATIENT)}" ${adm()?"":"disabled"}>${!PATIENT&&!adm()?`<p style="color:#b45309">${t("patientSetByAdmin")}</p>`:""}<label>${t("caretaker")}</label><input value="${esc(me.name)}" disabled></div>
 <div class="card"><h3>${t("shiftInfo")}</h3><div class="g2">${fld("ss",t("shiftStart"),"datetime-local")}${fld("se",t("shiftEnd"),"datetime-local")}</div></div>
 <div class="card"><h3>${t("condition")}</h3><div class="g2">${fld("temp",t("temp"),"text","37.0")}${fld("spo2",t("spo2"),"text","98")}${fld("bp",t("bp"),"text","120/80")}${fld("hr",t("hr"),"text","75")}${fld("sugar",t("sugar"),"text","6.5")}<div><label>${t("cough")}</label><select id="cough"><option value="no">${t("no")}</option><option value="yes">${t("yes")}</option></select></div></div><div id="vwarn" style="margin-top:8px"></div><label>${t("others")}</label><textarea id="others"></textarea></div>
-<div class="card"><h3>${t("tasks")}</h3>${tl("milk",t("milk"))}${tl("pampers",t("pampers"))}
+<div class="card"><h3>${t("tasks")}</h3>${tl("milk",t("milk"))}${tl("pampers",t("pampers"))}${tl("bath",t("bath"))}
 <label>${t("bedsoreQ")}</label><select id="bs" onchange="$('#bsx').style.display=this.value==='yes'?'block':'none'"><option value="no">${t("no")}</option><option value="yes">${t("yes")}</option></select>
 <div id="bsx" style="display:none"><label>${t("attach")}</label><input type="file" accept="image/*" capture="environment" multiple onchange="pics(this)"><div class="th" id="th"></div></div>
 ${tl("meds",t("meds"))}${tl("right",t("right"))}${tl("left",t("left"))}<label>${t("other")}</label><textarea id="ot"></textarea></div>
 <div class="card"><h3>${t("handover")}</h3><textarea id="ho"></textarea></div><p id="msg"></p><button id="sub" style="width:100%;padding:13px">${t("submit")}</button>`;
-  ["milk","pampers","meds","right","left"].forEach(i=>tm(i));$("#sub").onclick=submit;
+  ["milk","pampers","bath","meds","right","left"].forEach(i=>tm(i));
+  $("#c").addEventListener("input",scheduleDraft);$("#c").addEventListener("change",saveDraft);$("#c").addEventListener("focusout",saveDraft);
+  $("#sub").onclick=submit;restoreDraft();
   ["temp","spo2","bp","hr","sugar"].forEach(id=>{const e=$("#"+id);if(e)e.addEventListener("input",checkVitals)});checkVitals()}
 // ---- Patient (super admin)
 async function pat(){PATIENT=(await api("/patient")).name||"";$("#c").innerHTML=`<div class="card"><h3>${t("patientTitle")}</h3><label>${t("patientName")}</label><input id="pn" value="${esc(PATIENT)}"><p style="color:#555">${t("patientHint")}</p><p id="pm"></p><button onclick="savePatient()">${t("save")}</button></div>`}
-async function savePatient(){const v=$("#pn").value.trim();try{const r=await api("/patient","PUT",{name:v});PATIENT=r.name;$("#pn").value=PATIENT;$("#pm").innerHTML=`<span class="ok">${t("patientSaved")}</span>`}catch(e){$("#pm").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function savePatient(){const v=$("#pn").value.trim();try{const r=await api("/patient","PUT",{name:v});PATIENT=r.name;updateDraftPatient(PATIENT);$("#pn").value=PATIENT;$("#pm").innerHTML=`<span class="ok">${t("patientSaved")}</span>`}catch(e){$("#pm").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+// ---- Telegram settings (super admin, optional)
+async function settings(){let tg={};try{tg=(await api("/settings")).telegram||{}}catch(e){}
+ $("#c").innerHTML=`<div class="card"><h3>${t("settingsTitle")}</h3><p style="color:#555">${t("settingsHint")}</p><p style="color:#555;font-size:13px">${t("tgHow")}</p>
+ <label>${t("tgToken")}</label><input id="tgTok" type="password" autocomplete="off" placeholder="${tg.tokenSet?esc(t("tgTokenSaved").replace("{c}",tg.tokenHint)):esc(t("tgTokenPh"))}">
+ <label>${t("tgChat")}</label><input id="tgChat" value="${esc(tg.chatId||"")}" placeholder="${esc(t("tgChatPh"))}">
+ <p style="color:#555;font-size:13px">${t("tgKeep")}</p><p id="tgm"></p>
+ <button onclick="saveSettings()">${t("save")}</button> <button class="s" onclick="clearSettings()">${t("tgClear")}</button></div>`}
+async function saveSettings(){try{const r=await api("/settings","PUT",{telegram:{token:$("#tgTok").value.trim(),chatId:$("#tgChat").value.trim()}});await settings();$("#tgm").innerHTML=`<span class="ok">${r.enabled?t("tgSaved"):t("tgOff")}</span>`}catch(e){$("#tgm").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function clearSettings(){if(!confirm(t("tgClearQ")))return;try{await api("/settings","PUT",{telegram:{clear:true}});await settings();$("#tgm").innerHTML=`<span class="ok">${t("tgOff")}</span>`}catch(e){alert(e.message)}}
 const tl=(id,l)=>`<label>${l}</label><div id="${id}"></div><button class="s" onclick="tm('${id}')">${t("addTime")}</button>`;
 function tm(id){$("#"+id).insertAdjacentHTML("beforeend",`<div class="tm"><input type="time"></div>`)}
 const times=id=>[...document.querySelectorAll(`#${id} input`)].map(x=>x.value).filter(Boolean);
@@ -106,17 +227,19 @@ function checkVitals(){if(!$("#vwarn"))return;const ids=["temp","spo2","bp","hr"
   if(!any){el.innerHTML="";return}
   el.innerHTML=a.length?`<div class="err">⚠️ ${t("alertTitle")}</div><ul style="margin:4px 0 0;padding-left:20px;color:#c0392b">${a.map(x=>`<li>${esc(x.msg)}</li>`).join("")}</ul>`:`<span class="ok">${t("normalVitals")}</span>`}
 function rs(f){return new Promise(ok=>{const i=new Image();i.onload=()=>{const k=Math.min(1,800/i.width,600/i.height),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",.85))};i.src=URL.createObjectURL(f)})}
-async function pics(el){for(const f of el.files)PH.push(await rs(f));$("#th").innerHTML=PH.map(p=>`<img src="${p}">`).join("")}
+async function pics(el){for(const f of el.files)PH.push(await rs(f));$("#th").innerHTML=PH.map(p=>`<img src="${p}">`).join("");saveDraft()}
 async function submit(){const v=id=>$("#"+id).value.trim(),b=$("#sub");const fmt=s=>s?s.replace("T"," "):"";
-  const d={patient:v("patient"),shiftStart:fmt(v("ss")),shiftEnd:fmt(v("se")),temp:v("temp"),spo2:v("spo2"),bp:v("bp"),hr:v("hr"),sugar:v("sugar"),cough:v("cough"),others:v("others"),milk:times("milk"),pampers:times("pampers"),meds:times("meds"),bedsore:v("bs"),photos:v("bs")==="yes"?PH:[],right:times("right"),left:times("left"),otherTasks:v("ot"),handover:v("ho")};
+  const d={patient:v("patient"),shiftStart:fmt(v("ss")),shiftEnd:fmt(v("se")),temp:v("temp"),spo2:v("spo2"),bp:v("bp"),hr:v("hr"),sugar:v("sugar"),cough:v("cough"),others:v("others"),milk:times("milk"),pampers:times("pampers"),bath:times("bath"),meds:times("meds"),bedsore:v("bs"),photos:v("bs")==="yes"?PH:[],right:times("right"),left:times("left"),otherTasks:v("ot"),handover:v("ho")};
   const al=vitalAlerts();if(al.length&&!confirm(t("alertConfirm")+"\n\n"+al.map(x=>"• "+x.msg).join("\n")))return;
   b.disabled=true;b.textContent=t("submitting");$("#msg").textContent="";
-  try{const r=await api("/reports","POST",d);$("#c").innerHTML=`<div class="card"><h3>${t("saved")}</h3>${(r.alerts||[]).length?`<div class="err" style="margin:6px 0">⚠️ ${t("alertTitle")}<ul style="margin:4px 0 0;padding-left:20px">${r.alerts.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}<p>Email: ${esc(r.sent.email)}<br>Telegram: ${esc(r.sent.telegram)}</p><button onclick="window.open('https://wa.me/?text='+encodeURIComponent(WA))">${t("wa")}</button> <button class="s" onclick="view(${r.id})">${t("viewPrint")}</button> <button class="s" onclick="tab='form';app()">${t("newForm")}</button></div>`;WA=r.text}
+  try{const r=await api("/reports","POST",d);clearDraft();$("#c").innerHTML=`<div class="card"><h3>${t("saved")}</h3>${(r.alerts||[]).length?`<div class="err" style="margin:6px 0">⚠️ ${t("alertTitle")}<ul style="margin:4px 0 0;padding-left:20px">${r.alerts.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}<p>Email: ${esc(r.sent.email)}<br>Telegram: ${esc(r.sent.telegram)}</p><button onclick="window.open('https://wa.me/?text='+encodeURIComponent(WA))">${t("wa")}</button> <button class="s" onclick="view(${r.id})">${t("viewPrint")}</button> <button class="s" onclick="tab='form';app()">${t("newForm")}</button></div>`;WA=r.text}
   catch(e){$("#msg").innerHTML=`<span class="err">${esc(e.message)}</span>`;b.disabled=false;b.textContent=t("submit")}}
 async function view(id){const w=window.open("");try{w.document.write(await api("/reports/"+id))}catch(e){w.close();alert(e.message)}}
 // ---- History
-async function hist(){$("#c").innerHTML=`<div class="card"><h3>${t("historyTitle")}</h3><div id="hl">${t("loading")}</div></div>`;
-  const r=await api("/reports");$("#hl").innerHTML=r.length?`<table><tr><th>${t("date")}</th><th>${t("patientCol")}</th><th>${t("caretakerCol")}</th><th></th></tr>${r.map(x=>`<tr><td>${esc(x.ts)}</td><td>${esc(x.patient)}</td><td>${esc(x.byName)}</td><td><button class="s" onclick="view(${x.id})">${t("open")}</button></td></tr>`).join("")}</table>`:t("noReports")}
+async function hist(){$("#c").innerHTML=`<div class="card"><h3>${t("historyTitle")}</h3>${adm()?`<button class="d" onclick="clearHistory()">${t("delAllReports")}</button>`:""}<div id="hl">${t("loading")}</div></div>`;
+  const r=await api("/reports");$("#hl").innerHTML=r.length?`<table><tr><th>${t("date")}</th><th>${t("patientCol")}</th><th>${t("caretakerCol")}</th><th></th></tr>${r.map(x=>`<tr><td>${esc(x.ts)}</td><td>${esc(x.patient)}</td><td>${esc(x.byName)}</td><td><button class="s" onclick="view(${x.id})">${t("open")}</button>${adm()?` <button class="d" onclick="delReport(${x.id})">${t("delete")}</button>`:""}</td></tr>`).join("")}</table>`:t("noReports")}
+async function delReport(id){if(!confirm(t("delReportQ")))return;try{await api("/reports/"+id,"DELETE");hist()}catch(e){alert(e.message)}}
+async function clearHistory(){if(!confirm(t("delAllReportsQ")))return;try{await api("/reports","DELETE");hist()}catch(e){alert(e.message)}}
 // ---- Inventory
 let INV=[],invFilter="all",invQ="";const adm=()=>me.role==="admin";
 async function inv(){$("#c").innerHTML=`<div class="card"><h3>${t("invTitle")}</h3><div class="g3" id="ist"></div><input id="iq" placeholder="${t("searchItem")}" value="${esc(invQ)}" oninput="invQ=this.value;invList()"></div>${adm()?`<div class="card"><h3>${t("addItemAdmin")}</h3><div class="g2">${fld("in",t("itemName"),"text",t("itemNamePh"))}${fld("iu",t("unit"),"text",t("unitPh"))}${fld("i0",t("initialStock"),"number")}${fld("im",t("minStock"),"number")}</div><p id="ie"></p><button onclick="addI()">${t("add")}</button></div>`:`<p style="color:#555">${t("stockOnly")}</p>`}<div class="card"><h3>${t("invList")}</h3><div id="il">${t("loading")}</div></div>`;il()}
@@ -135,10 +258,92 @@ async function setI(id,v){try{await api("/inventory/"+id,"PUT",{stock:Math.max(0
 async function addI(){try{await api("/inventory","POST",{name:$("#in").value,unit:$("#iu").value,stock:$("#i0").value,min:$("#im").value});["in","iu","i0","im"].forEach(i=>$("#"+i).value="");$("#ie").innerHTML="";il()}catch(e){$("#ie").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
 async function editI(id){const i=INV.find(x=>x.id===id),n=prompt(t("itemNamePrompt"),i.name);if(n===null)return;const u=prompt(t("unitPrompt"),i.unit);if(u===null)return;const m=prompt(t("minPrompt"),i.min);if(m===null)return;try{await api("/inventory/"+id,"PUT",{name:n,unit:u,min:m});il()}catch(e){alert(e.message)}}
 async function delI(id){if(confirm(t("deleteItemQ"))){await api("/inventory/"+id,"DELETE");il()}}
-// ---- Users (super admin)
-async function usr(){$("#c").innerHTML=`<div class="card"><h3>${t("createUser")}</h3>${fld("nu",t("username"))}${fld("nn",t("fullName"))}${fld("np",t("passwordMin"),"password")}<p id="um"></p><button onclick="addU()">${t("create")}</button></div><div class="card"><h3>${t("userList")}</h3><div id="ul"></div></div>`;ul()}
-async function ul(){const r=await api("/users");$("#ul").innerHTML=`<table>${r.map(x=>`<tr><td>${esc(x.username)}</td><td>${esc(x.name)}</td><td>${x.role}</td><td>${x.username===me.username?"":`<button class="d" onclick="delU('${esc(x.username)}')">${t("delete")}</button>`}</td></tr>`).join("")}</table>`}
-async function addU(){try{await api("/users","POST",{username:$("#nu").value,name:$("#nn").value,password:$("#np").value});$("#um").innerHTML=`<span class="ok">${t("userCreated")}</span>`;["nu","nn","np"].forEach(i=>$("#"+i).value="");ul()}catch(e){$("#um").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
-async function delU(n){if(confirm(t("deleteUserQ").replace("{n}",n))){await api("/users/"+encodeURIComponent(n),"DELETE");ul()}}
+// ---- Appointments (admin edits, users view only)
+let APPT=[];const fmtD=s=>{if(!s)return"";const d=new Date(s);return isNaN(d)?esc(s):d.toLocaleString(lang==="en"?"en-MY":"ms-MY",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})};
+async function appt(){$("#c").innerHTML=`<div class="card"><h3>${t("apptTitle")}</h3>${adm()?`<div class="g2">${fld("at",t("apptTitleLabel"),"text",t("apptTitlePh"))}${fld("ad",t("apptDateLabel"),"datetime-local")}</div><p id="ae"></p><button onclick="addA()">${t("add")}</button>`:`<p style="color:#555">${t("apptViewOnly")}</p>`}</div><div class="card"><h3>${t("apptList")}</h3><div id="al">${t("loading")}</div></div>`;al()}
+async function al(){APPT=await api("/appointments");$("#al").innerHTML=APPT.length?APPT.slice().sort((a,b)=>String(a.date).localeCompare(String(b.date))).map(apptHtml).join(""):t("noAppts")}
+const apptHtml=a=>`<div class="it"><div class="row" style="justify-content:space-between"><b>${esc(a.title)}</b><span>${adm()?`<button class="s" onclick="editA(${a.id})">${t("edit")}</button> <button class="d" onclick="delA(${a.id})">${t("delete")}</button>`:""}</span></div><div>🗓️ ${fmtD(a.date)}</div><small style="color:#666">${t("updatedAppt")} ${esc(a.ts)} ${t("by")} ${esc(a.byName)}</small></div>`;
+async function addA(){try{await api("/appointments","POST",{title:$("#at").value,date:$("#ad").value});$("#at").value="";$("#ad").value="";$("#ae").innerHTML="";al()}catch(e){$("#ae").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function editA(id){const a=APPT.find(x=>x.id===id),n=prompt(t("apptTitlePrompt"),a.title);if(n===null)return;const d=prompt(t("apptDatePrompt"),a.date);if(d===null)return;try{await api("/appointments/"+id,"PUT",{title:n,date:d});al()}catch(e){alert(e.message)}}
+async function delA(id){if(confirm(t("deleteApptQ"))){await api("/appointments/"+id,"DELETE");al()}}
+// ---- Medical Records (admin edits, users view only)
+let RECS=[],PEND=[],REM=[],editRid=null,editFiles=[];
+const CATK={lab:"catLab",imaging:"catImaging",rx:"catRx",doctor:"catDoctor",other:"catOther"};
+const rsr=f=>new Promise(ok=>{const i=new Image();i.onload=()=>{const k=Math.min(1,1400/i.width,1400/i.height),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",.82))};i.src=URL.createObjectURL(f)});
+async function rec(){PEND=[];REM=[];editRid=null;editFiles=[];
+ $("#c").innerHTML=(adm()?recForm():"")+`<p style="color:var(--mut)${adm()?";display:none":""}">${t("recViewOnly")}</p><div class="card"><h3>${t("recList")}</h3><div id="rl">${t("loading")}</div></div>`;rl()}
+function recForm(){return `<div class="card"><h3 id="rhdr">${t("recAdd")}</h3>
+ <label>${t("recTitleLbl")}</label><input id="rt" placeholder="${t("recTitlePh")}">
+ <div class="g2"><div><label>${t("recCat")}</label><select id="rc">${[["lab","catLab"],["imaging","catImaging"],["rx","catRx"],["doctor","catDoctor"],["other","catOther"]].map(([v,k])=>`<option value="${v}">${t(k)}</option>`).join("")}</select></div>
+ <div><label>${t("recDate")}</label><input id="rd" type="date"></div></div>
+ <label>${t("recNotes")}</label><textarea id="rn"></textarea>
+ <label>${t("recFiles")}</label><input id="rf" type="file" multiple accept="image/*,application/pdf" onchange="rPick(this)">
+ <div class="fchips" id="rfl"></div><p id="rm"></p>
+ <button id="rbtn" onclick="rSave()">${t("add")}</button> <button class="s" id="rcancel" style="display:none" onclick="rCancelEdit()">${t("cancel")}</button></div>`}
+async function rPick(el){const rm=$("#rm");rm.textContent="";
+ for(const f of el.files){if(f.size>12e6){rm.innerHTML=`<span class="err">${t("fileTooBig")} (${esc(f.name)})</span>`;continue}
+  if(f.type==="application/pdf"){PEND.push({name:f.name,mime:"application/pdf",data:await new Promise(ok=>{const fr=new FileReader();fr.onload=()=>ok(fr.result);fr.readAsDataURL(f)})})}
+  else if(/^image\//.test(f.type))PEND.push({name:f.name.replace(/\.\w+$/,".jpg"),mime:"image/jpeg",data:await rsr(f)});
+  else rm.innerHTML=`<span class="err">${t("badType")} (${esc(f.name)})</span>`}
+ el.value="";rFl()}
+function rFl(){const el=$("#rfl");if(!el)return;const ico=m=>m==="application/pdf"?"📄":"🖼️";
+ el.innerHTML=editFiles.filter(f=>!REM.includes(f.id)).map(f=>`<span class="fchip">${ico(f.mime)} ${esc(f.name)} <i onclick="rDelExisting('${f.id}')" title="${t("delete")}">×</i></span>`).join("")
+ +REM.map(fid=>{const f=editFiles.find(x=>x.id===fid);return f?`<span class="fchip rm">${ico(f.mime)} ${esc(f.name)} <i onclick="rUnDel('${fid}')" title="${t("undo")}">↺</i></span>`:""}).join("")
+ +PEND.map((f,i)=>`<span class="fchip">${ico(f.mime)} ${esc(f.name)} <i onclick="rDelPend(${i})" title="${t("delete")}">×</i></span>`).join("")}
+function rDelPend(i){PEND.splice(i,1);rFl()}
+function rDelExisting(fid){if(!REM.includes(fid))REM.push(fid);rFl()}
+function rUnDel(fid){REM=REM.filter(x=>x!==fid);rFl()}
+async function rSave(){const rm=$("#rm"),ti=$("#rt").value.trim();if(!ti){rm.innerHTML=`<span class="err">${t("recTitleLbl")} ${lang==="en"?"required":"diperlukan"}</span>`;return}
+ const d={title:ti,cat:$("#rc").value,date:$("#rd").value,notes:$("#rn").value,files:PEND.map(f=>({name:f.name,mime:f.mime,data:f.data}))};rm.textContent="";
+ try{if(editRid!=null)await api("/records/"+editRid,"PUT",{...d,removeFiles:REM});else await api("/records","POST",d);rCancelEdit();rl()}catch(e){rm.innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+function rCancelEdit(){editRid=null;editFiles=[];PEND=[];REM=[];["rt","rd","rn"].forEach(i=>{const e=$("#"+i);if(e)e.value=""});
+ const h=$("#rhdr"),bt=$("#rbtn"),cx=$("#rcancel"),s=$("#rc");if(h)h.textContent=t("recAdd");if(bt)bt.textContent=t("add");if(cx)cx.style.display="none";if(s)s.value="other";rFl()}
+async function rl(){RECS=await api("/records");$("#rl").innerHTML=RECS.length?RECS.slice().sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))||b.id-a.id).map(recHtml).join(""):t("noRecs")}
+const recHtml=r=>`<div class="it"><div class="row" style="justify-content:space-between"><b>${esc(r.title)}</b><span class="bg">${t(CATK[r.cat]||"catOther")}</span></div>
+ <div class="row">📅 ${r.date?esc(r.date):"-"}${adm()?`<span style="margin-left:auto;display:flex;gap:6px"><button class="s" onclick="editR(${r.id})">${t("edit")}</button><button class="d" onclick="delR(${r.id})">${t("delete")}</button></span>`:""}</div>
+ ${r.notes?`<p style="margin:6px 0 0;color:#456b57;white-space:pre-wrap">${esc(r.notes)}</p>`:""}
+ <div class="fchips">${(r.files||[]).map(f=>`<button type="button" class="fchip" onclick="openF(${r.id},'${f.id}')">${f.mime==="application/pdf"?"📄":"🖼️"} ${esc(f.name)}${adm()?` <i onclick="event.stopPropagation();delF(${r.id},'${f.id}')" title="${t("delete")}">×</i>`:""}</button>`).join("")}</div>
+ <small>${t("updatedAppt")} ${esc(r.ts)} ${t("by")} ${esc(r.byName)}</small></div>`;
+async function editR(id){const r=RECS.find(x=>x.id===id);if(!r||!$("#rt"))return;editRid=id;editFiles=(r.files||[]).slice();PEND=[];REM=[];
+ $("#rt").value=r.title;$("#rc").value=CATK[r.cat]?r.cat:"other";$("#rd").value=r.date||"";$("#rn").value=r.notes||"";
+ $("#rhdr").textContent=t("recEdit");$("#rbtn").textContent=t("save");$("#rcancel").style.display="";rFl();$("#rt").focus()}
+async function delR(id){if(confirm(t("delRecQ"))){await api("/records/"+id,"DELETE");if(editRid===id)rCancelEdit();rl()}}
+async function delF(rid,fid){if(confirm(t("delFileQ"))){await api("/records/"+rid+"/files/"+fid,"DELETE");if(editRid===rid){editFiles=editFiles.filter(x=>x.id!==fid);REM=REM.filter(x=>x!==fid);rFl()}rl()}}
+async function openF(rid,fid){try{const res=await fetch("/api/records/"+rid+"/files/"+fid,{headers:{Authorization:"Bearer "+tok,"X-Lang":lang}});
+ if(!res.ok)throw new Error(lang==="en"?"File not found":"Fail tiada");const u=URL.createObjectURL(await res.blob());window.open(u,"_blank");setTimeout(()=>URL.revokeObjectURL(u),12e4)}catch(e){alert(e.message)}}
+// ---- Users (super admin: own caregivers only)
+let USRS=[];
+async function usr(){$("#c").innerHTML=`<div class="card"><h3>${t("addUserTitle")}</h3><p style="color:#555">${t("usersHint")}</p>
+  <div class="g2">${fld("nu",t("userUsername"),"text",t("userUsernamePh"))}${fld("np",t("userPassword"),"password")}</div>
+  <div class="g2">${fld("nn",t("fullName"))}${fld("ne",t("userEmail"),"email","nama@email.com")}</div>
+  <p id="um"></p><button onclick="addU()">${t("addUserBtn")}</button></div>
+  <div class="card"><h3>${t("userList")}</h3><div id="ul">${t("loading")}</div></div>`;ul()}
+async function ul(){USRS=await api("/users");
+ $("#ul").innerHTML=USRS.length?`<table><tr><th>${t("username")}</th><th>${t("fullName")}</th><th>${t("email")}</th><th>${t("status")}</th><th></th></tr>${USRS.map((x,i)=>`<tr><td>${esc(x.username)}</td><td>${esc(x.name)}</td><td>${esc(x.email||"-")}</td><td>${x.role==="admin"?`<span class="bg">${t("roleAdmin")}</span>`:x.status==="active"?`<span class="ok">${t("statusActive")}</span>`:`<span class="err">${t("statusPending")}</span>`}</td><td>${x.role==="admin"?"":`${x.status!=="active"?`<button class="s" onclick="resendU(${i})">${t("resend")}</button> `:""}<button class="s" onclick="resetU(${i})">${t("resetPwd")}</button> <button class="d" onclick="delU(${i})">${t("delete")}</button>`}</td></tr>`).join("")}</table>`:`<p>${t("noUsers")}</p>`}
+async function addU(){try{await api("/users","POST",{username:$("#nu").value.trim(),password:$("#np").value,name:$("#nn").value,email:$("#ne").value});
+ $("#um").innerHTML=`<span class="ok">${t("userCreated")}</span>`;
+ ["nu","np","nn","ne"].forEach(id=>$("#"+id).value="");ul()}catch(e){$("#um").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function resendU(i){const x=USRS[i];if(!x)return;try{const r=await api("/users/"+encodeURIComponent(x.username)+"/resend","POST",{});alert(r.code?t("setupCodeLabel").replace("{c}",r.code):t("setupSent"));ul()}catch(e){alert(e.message)}}
+async function resetU(i){const x=USRS[i];if(!x)return;
+ if(!x.email){const np=prompt(t("newPwdPrompt").replace("{n}",x.name||x.username));if(np===null)return;try{await api("/users/"+encodeURIComponent(x.username)+"/reset","POST",{password:np});alert(t("pwdResetDone"));ul()}catch(e){alert(e.message)}return}
+ if(!confirm(t("resetPwdQ").replace("{n}",x.email||x.username)))return;try{const r=await api("/users/"+encodeURIComponent(x.username)+"/reset","POST",{});alert(r.code?t("setupCodeLabel").replace("{c}",r.code):t("resetSent"));ul()}catch(e){alert(e.message)}}
+async function delU(i){const x=USRS[i];if(!x)return;if(confirm(t("deleteUserQ").replace("{n}",x.email||x.username))){await api("/users/"+encodeURIComponent(x.username),"DELETE");ul()}}
+// ---- Master admin (super admin accounts only)
+let MUSERS=[];
+async function master(){$("#c").innerHTML=`<div class="card"><h3>${t("masterTitle")}</h3><p style="color:#555">${t("masterHint")}</p></div>
+ <div class="card"><h3>${t("masterAddTitle")}</h3>
+ <div class="g2">${fld("mnu",t("userUsername"),"text",t("userUsernamePh"))}${fld("mnp",t("userPassword"),"password")}</div>
+ <div class="g2">${fld("mnn",t("fullName"))}${fld("mne",t("userEmail"),"email","nama@email.com")}</div>
+ <p id="mm"></p><button onclick="addM()">${t("addUserBtn")}</button></div>
+ <div class="card"><h3>${t("masterList")}</h3><div id="ml">${t("loading")}</div></div>`;ml()}
+async function ml(){MUSERS=await api("/master/users");
+ $("#ml").innerHTML=MUSERS.length?`<table><tr><th>${t("username")}</th><th>${t("fullName")}</th><th>${t("email")}</th><th>${t("caregiversLabel")}</th><th>${t("status")}</th><th></th></tr>${MUSERS.map((x,i)=>`<tr><td>${esc(x.username)}</td><td>${esc(x.name)}</td><td>${esc(x.email||"-")}</td><td>${x.caregivers}</td><td>${x.status==="active"?`<span class="ok">${t("statusActive")}</span>`:`<span class="err">${t("statusPending")}</span>`}</td><td><button class="s" onclick="resetM(${i})">${t("resetPwd")}</button> <button class="d" onclick="delM(${i})">${t("delete")}</button></td></tr>`).join("")}</table>`:`<p>${t("masterNoAdmins")}</p>`}
+async function addM(){try{await api("/master/users","POST",{username:$("#mnu").value.trim(),password:$("#mnp").value,name:$("#mnn").value,email:$("#mne").value});
+ $("#mm").innerHTML=`<span class="ok">${t("userCreated")}</span>`;["mnu","mnp","mnn","mne"].forEach(id=>$("#"+id).value="");ml()}catch(e){$("#mm").innerHTML=`<span class="err">${esc(e.message)}</span>`}}
+async function resetM(i){const x=MUSERS[i];if(!x)return;const np=prompt(t("masterResetQ").replace("{n}",x.username));
+ if(np===null)return;if(np.trim().length<6){alert(t("passwordMin"));return}
+ try{await api("/master/users/"+encodeURIComponent(x.username)+"/reset","POST",{password:np.trim()});alert(t("masterResetDone"));ml()}catch(e){alert(e.message)}}
+async function delM(i){const x=MUSERS[i];if(!x)return;if(!confirm(t("masterDeleteQ").replace("{n}",x.username)))return;
+ try{await api("/master/users/"+encodeURIComponent(x.username),"DELETE");ml()}catch(e){alert(e.message)}}
 init();
 </script></body></html>
